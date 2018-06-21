@@ -310,5 +310,28 @@ public class CategoryDaoImp implements CategoryDao{
 		return sc;
 	}
 
+	@Override
+	public void updateSecondCategory(SecondCategory sc, int operator_id) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps=null;
+		Date operator_date = new Date();
+		try {
+			ps=conn.prepareStatement("update secondcategory set sc_name=?,sc_info=?,operator_id=?,operator_date=?,fc_id=?"+
+			" where sc_id=?");
+			ps.setString(1, sc.getSc_name());
+			ps.setString(2, sc.getSc_info());
+			ps.setInt(3, operator_id);
+			ps.setDate(4, new java.sql.Date(operator_date.getTime()));
+			ps.setInt(5, sc.getFc().getFc_id());
+			ps.setInt(6, sc.getSc_id());
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			DBUtils.closePS(ps);
+		}
+	}
+
 	
 }

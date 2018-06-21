@@ -31,4 +31,6 @@ public interface CategoryDao {
 
 	SecondCategory getSecondCategoryById(int sc_id);
 
+	void updateSecondCategory(SecondCategory sc, int operator_id);
+
 }

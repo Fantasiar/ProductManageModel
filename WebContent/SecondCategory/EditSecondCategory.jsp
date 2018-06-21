@@ -15,9 +15,11 @@
 <div class="container" style="margin-top: 80px">
     <div class="row" >
         <div class="col-md-8 " style="background-color: #D1EEEE;border: 1px solid cornflowerblue;border-radius: 8px;height: 500px">
-            <form action="" class="form-horizon" role="form" method="post">
+            <form action="${pageContext.request.contextPath}/editSecondCategoryServlet?action=update" class="form-horizon" role="form" method="post">
                 <div class="form-group" style="margin-top: 30px">
                     <label style="margin-left: 40px"><h3>请选择所属的一级分类，并输入修改后的二级分类名和描述信息</h3></label>
+                	<input type="hidden" value="${sc.sc_id}" name="sc_id">
+          
                 </div>
                 <div class="row">
                     <div class="col-md-4" style="margin-left: 120px">
@@ -40,7 +42,7 @@
                     </div>
                 </div>
                 <div class="form-group" style="margin-top: 30px">
-                    <textarea class="form-control" rows="8" style="width:500px;border-radius: 6px;margin-left: 115px">${sc.sc_info}</textarea>
+                    <textarea name="sc_info" class="form-control" rows="8" style="width:500px;border-radius: 6px;margin-left: 115px">${sc.sc_info}</textarea>
                 </div>
                 <div class="form-group" style="margin-top: 30px">
                     <button type="submit" class="btn btn-default" style="margin-left: 290px;margin-right: 20px">修改</button>

@@ -114,4 +114,13 @@ public class CategoryService {
 		CategoryDao dao=new CategoryDaoImp(conn);
 		return dao.getSecondCategoryById(sc_id);
 	}
+
+	public void updateSecondCategory(SecondCategory sc, int operator_id) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		DBUtils.beginTrasaction(conn);
+		CategoryDao dao=new CategoryDaoImp(conn);
+		dao.updateSecondCategory(sc,operator_id);
+		DBUtils.commit(conn);
+	}
 }

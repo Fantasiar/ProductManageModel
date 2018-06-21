@@ -48,9 +48,24 @@ public class EditSecondCategoryServlet extends HttpServlet {
 		}
 	}
 
-	private void doUpdateSecondCategory(HttpServletRequest request, HttpServletResponse response) {
+	private void doUpdateSecondCategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// TODO Auto-generated method stub
+		int operator_id=110;
+		String sc_id = request.getParameter("sc_id");
+		String sc_name = request.getParameter("sc_name");
+		String sc_info = request.getParameter("sc_info");
 		
+		String fc_name = request.getParameter("fc_name");
+		String pageNum = request.getSession().getAttribute("pageNumSc").toString();
+		SecondCategory sc=new SecondCategory();
+		FirstCategory fc=CategoryService.getInstance().getFirstCategoryByName(fc_name);
+		
+		sc.setSc_id(Integer.parseInt(sc_id));
+		sc.setSc_name(sc_name);
+		sc.setSc_info(sc_info);	
+		sc.setFc(fc);
+		CategoryService.getInstance().updateSecondCategory(sc,operator_id);
+		response.sendRedirect(request.getContextPath()+"/searchSecondCategoryServlet?action=sc&pageNumSc="+pageNum);
 	}
 
 	private void doEditSecondCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
