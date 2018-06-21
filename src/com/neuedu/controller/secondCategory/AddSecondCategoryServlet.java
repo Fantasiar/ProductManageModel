@@ -1,4 +1,4 @@
-package com.neuedu.controller.firstCategory;
+package com.neuedu.controller.secondCategory;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,18 +6,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.neuedu.model.po.FirstCategory;
+import com.neuedu.model.po.SecondCategory;
 import com.neuedu.model.service.CategoryService;
 
 /**
- * Servlet implementation class DeleteFirstCategoryServlet
+ * Servlet implementation class AddSecondCategoryServlet
  */
-public class DeleteFirstCategoryServlet extends HttpServlet {
+public class AddSecondCategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteFirstCategoryServlet() {
+    public AddSecondCategoryServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,17 +37,19 @@ public class DeleteFirstCategoryServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int operator_id=111;
+		int operator_id=110;
 		request.setCharacterEncoding("utf-8");
-		String[] chks = request.getParameterValues("chk");
-		int[] ids=new int[chks.length];
-		for (int i = 0; i < chks.length; i++) {
-			ids[i]=Integer.parseInt(chks[i]);
-		}
+		String fc_name = request.getParameter("fc_name");
+		String sc_name = request.getParameter("sc_name");
+		String sc_info = request.getParameter("sc_info");
 		
-		CategoryService.getInstance().deleteFirstCategory(ids,operator_id);
-		String pageNum=request.getSession().getAttribute("pageNumFc").toString();
-		response.sendRedirect(request.getContextPath()+"/searchFirstCategoryServlet?action=fc&pageNumFc="+pageNum);
+		FirstCategory fc=CategoryService.getInstance().getFirstCategoryByName(fc_name);
+		SecondCategory sc=new SecondCategory();
+		sc.setSc_name(sc_name);
+		sc.setSc_info(sc_info);
+		sc.setFc(fc);
+		CategoryService.getInstance().addSecondCategory(sc,operator_id);
+		response.sendRedirect(request.getContextPath()+"/searchFirstCategoryServlet?action=sc");
 	}
 
 }

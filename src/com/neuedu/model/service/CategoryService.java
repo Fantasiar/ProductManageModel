@@ -6,6 +6,7 @@ import java.util.List;
 import com.neuedu.model.dao.CategoryDao;
 import com.neuedu.model.dao.CategoryDaoImp;
 import com.neuedu.model.po.FirstCategory;
+import com.neuedu.model.po.SecondCategory;
 import com.neuedu.utils.DBUtils;
 
 public class CategoryService {
@@ -68,5 +69,49 @@ public class CategoryService {
 		CategoryDao dao=new CategoryDaoImp(conn);
 		dao.deleteFirstCategory(ids,operator_id);
 		DBUtils.commit(conn);
+	}
+
+	public List<FirstCategory> searchAllFc() {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		CategoryDao dao=new CategoryDaoImp(conn);
+		return dao.searchAllFc();
+	}
+
+	public FirstCategory getFirstCategoryByName(String fc_name) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		CategoryDao dao=new CategoryDaoImp(conn);
+		return dao.getFirstCategoryByName(fc_name);
+	}
+
+	public void addSecondCategory(SecondCategory sc, int operator_id) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		DBUtils.beginTrasaction(conn);
+		CategoryDao dao=new CategoryDaoImp(conn);
+		dao.addSecondCategory(sc,operator_id);
+		DBUtils.commit(conn);
+	}
+
+	public List<SecondCategory> searchPageSc(int pageNum) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		CategoryDao dao=new CategoryDaoImp(conn);
+		return dao.searchPageSc(pageNum);
+	}
+
+	public int searchScPageCount() {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		CategoryDao dao=new CategoryDaoImp(conn);
+		return dao.searchScPageCount();
+	}
+
+	public SecondCategory getSecondCategoryById(int sc_id) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		CategoryDao dao=new CategoryDaoImp(conn);
+		return dao.getSecondCategoryById(sc_id);
 	}
 }

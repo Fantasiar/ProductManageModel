@@ -1,4 +1,4 @@
-package com.neuedu.controller.firstCategory;
+package com.neuedu.controller.secondCategory;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,18 +6,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.neuedu.model.service.CategoryService;
-
 /**
- * Servlet implementation class DeleteFirstCategoryServlet
+ * Servlet implementation class DeleteSecondCategoryServlet
  */
-public class DeleteFirstCategoryServlet extends HttpServlet {
+public class DeleteSecondCategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteFirstCategoryServlet() {
+    public DeleteSecondCategoryServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,17 +33,7 @@ public class DeleteFirstCategoryServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int operator_id=111;
-		request.setCharacterEncoding("utf-8");
-		String[] chks = request.getParameterValues("chk");
-		int[] ids=new int[chks.length];
-		for (int i = 0; i < chks.length; i++) {
-			ids[i]=Integer.parseInt(chks[i]);
-		}
 		
-		CategoryService.getInstance().deleteFirstCategory(ids,operator_id);
-		String pageNum=request.getSession().getAttribute("pageNumFc").toString();
-		response.sendRedirect(request.getContextPath()+"/searchFirstCategoryServlet?action=fc&pageNumFc="+pageNum);
 	}
 
 }

@@ -66,11 +66,11 @@
                 </div>
                 <div class="col-md-1">
                 	<c:forEach begin="1" end="${pageCount}" var="p">
-                		<c:if test="${p==pageNum}">
+                		<c:if test="${p==pageNumFc}">
                 			<label for="">${p}  </label>
                 		</c:if>
-                		<c:if test="${p!=pageNum}">
-                			<label for=""><a href="${pageContext.request.contextPath}/searchFirstCategoryServlet?pageNum=${p}">${p}  </a></label>
+                		<c:if test="${p!=pageNumFc}">
+                			<label for=""><a href="${pageContext.request.contextPath}/searchFirstCategoryServlet?action=fc&pageNumFc=${p}">${p}  </a></label>
                 		</c:if>
                 	</c:forEach>                    
                 </div>

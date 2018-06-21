@@ -51,13 +51,13 @@ public class EditFirstCategoryServlet extends HttpServlet {
 		String fc_id = request.getParameter("fc_id");
 		String fc_name = request.getParameter("fc_name");
 		String fc_info = request.getParameter("fc_info");
-		String pageNum = request.getSession().getAttribute("pageNum").toString();
+		String pageNum = request.getSession().getAttribute("pageNumFc").toString();
 		FirstCategory fc=new FirstCategory();
 		fc.setFc_id(Integer.parseInt(fc_id));
 		fc.setFc_name(fc_name);
 		fc.setFc_info(fc_info);
 		CategoryService.getInstance().updateFirstCategory(fc,operator_id);
-		response.sendRedirect(request.getContextPath()+"/searchFirstCategoryServlet?pageNum="+pageNum);
+		response.sendRedirect(request.getContextPath()+"/searchFirstCategoryServlet?action=fc&pageNumFc="+pageNum);
 	}
 
 	private void doEditFirstCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

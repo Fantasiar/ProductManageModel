@@ -49,4 +49,44 @@
     <servlet-name>DeleteFirstCategoryServlet</servlet-name>
     <url-pattern>/deleteFirstCategoryServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddSecondCategoryServlet</display-name>
+    <servlet-name>AddSecondCategoryServlet</servlet-name>
+    <servlet-class>com.neuedu.controller.secondCategory.AddSecondCategoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddSecondCategoryServlet</servlet-name>
+    <url-pattern>/addSecondCategoryServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SearchSecondCategoryServlet</display-name>
+    <servlet-name>SearchSecondCategoryServlet</servlet-name>
+    <servlet-class>com.neuedu.controller.secondCategory.SearchSecondCategoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchSecondCategoryServlet</servlet-name>
+    <url-pattern>/searchSecondCategoryServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteSecondCategoryServlet</display-name>
+    <servlet-name>DeleteSecondCategoryServlet</servlet-name>
+    <servlet-class>com.neuedu.controller.secondCategory.DeleteSecondCategoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteSecondCategoryServlet</servlet-name>
+    <url-pattern>/deleteSecondCategoryServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditSecondCategoryServlet</display-name>
+    <servlet-name>EditSecondCategoryServlet</servlet-name>
+    <servlet-class>com.neuedu.controller.secondCategory.EditSecondCategoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditSecondCategoryServlet</servlet-name>
+    <url-pattern>/editSecondCategoryServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
