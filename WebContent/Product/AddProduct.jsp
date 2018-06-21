@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE>
 <html lang="en">
 <head>
@@ -8,8 +9,34 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		$("#fcName").blur(function() {
+			var fc_name=$(this).val();
+			$.ajax({
+				url:"${pageContext.request.contextPath}/addProductServlet?action=findSc",
+				async:false,
+				type:"POST",
+				data:{"fc_name":fc_name},
+				success:function(data){
+					var con="";
+					$.each(data,function(i,sc){
+					con+="<option>"+sc.sc_name+"</option>"
+					});
+					$("#sc_name").html(con);
+				},
+				error:function(){
+					alert("获取二级分类失败");
+				},
+				dataType:"json"
+			});
+		});
+			
+	})
+	</script>
 </head>
 <body>
+<jsp:include page="/index.jsp" />
 <div class="container" style="margin-top: 80px">
     <div class="row" >
         <div class="col-md-8 " style="background-color: #D1EEEE;border: 1px solid cornflowerblue;border-radius: 8px;height: 1100px">
@@ -23,20 +50,18 @@
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">商品一级分类</label>
                     <div class="col-md-4">
-                        <select class="form-control" style="height:40px;">
-                            <option>数码</option>
-                            <option>食品</option>
-                            <option>服装</option>
+                        <select id="fcName" name="fc_name" class="form-control" style="height:40px;">
+                                <c:forEach items="${fcList}" var="fc">
+                                	<option>${fc.fc_name}</option>
+                                </c:forEach>
                         </select>
                     </div>
                 </div>
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">商品二级分类</label>
                     <div class="col-md-4">
-                        <select class="form-control" style="height:40px;">
-                            <option>数码</option>
-                            <option>食品</option>
-                            <option>服装</option>
+                        <select id="sc_name" name="sc_name" class="form-control" style="height:40px;">
+                            
                         </select>
                     </div>
                 </div>

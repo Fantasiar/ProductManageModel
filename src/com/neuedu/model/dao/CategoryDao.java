@@ -33,4 +33,8 @@ public interface CategoryDao {
 
 	void updateSecondCategory(SecondCategory sc, int operator_id);
 
+	void deleteSecondCategory(int[] ids, int operator_id);
+
+	List<SecondCategory> searchScByFcId(int fc_id);
+
 }

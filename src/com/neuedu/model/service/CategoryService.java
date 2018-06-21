@@ -123,4 +123,20 @@ public class CategoryService {
 		dao.updateSecondCategory(sc,operator_id);
 		DBUtils.commit(conn);
 	}
+
+	public void deleteSecondCategory(int[] ids, int operator_id) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		DBUtils.beginTrasaction(conn);
+		CategoryDao dao=new CategoryDaoImp(conn);
+		dao.deleteSecondCategory(ids,operator_id);
+		DBUtils.commit(conn);
+	}
+
+	public List<SecondCategory> searchScByFcId(int fc_id) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		CategoryDao dao=new CategoryDaoImp(conn);
+		return dao.searchScByFcId(fc_id);
+	}
 }

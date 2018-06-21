@@ -58,6 +58,12 @@ public class SearchFirstCategoryServlet extends HttpServlet {
 			List<FirstCategory> fcList=CategoryService.getInstance().searchAllFc();
 			request.setAttribute("fcList", fcList);
 			request.getRequestDispatcher("/SecondCategory/AddSecondCategory.jsp").forward(request, response);
+		}else if ("addPro".equals(action)) {
+			List<FirstCategory> fcList=CategoryService.getInstance().searchAllFc();
+			
+			request.setAttribute("fcList", fcList);
+			request.getRequestDispatcher("/Product/AddProduct.jsp").forward(request, response);
+
 		}
 	
 	}

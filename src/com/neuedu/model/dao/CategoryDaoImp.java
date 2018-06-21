@@ -333,5 +333,46 @@ public class CategoryDaoImp implements CategoryDao{
 		}
 	}
 
+	@Override
+	public void deleteSecondCategory(int[] ids, int operator_id) {
+		// TODO Auto-generated method stub
+		String id=Arrays.toString(ids).replace('[','(').replace(']',')');
+		PreparedStatement ps=null;
+		Date operator_date = new Date();
+		try {
+			ps=conn.prepareStatement("update secondcategory set status=0,operator_id=?,operator_date=?"+
+			" where sc_id in "+id);
+			ps.setInt(1, operator_id);
+			ps.setDate(2, new java.sql.Date(operator_date.getTime()));
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			DBUtils.closePS(ps);
+		}
+	}
+
+	@Override
+	public List<SecondCategory> searchScByFcId(int fc_id) {
+		// TODO Auto-generated method stub
+		List<SecondCategory> list=new ArrayList<SecondCategory>();
+		PreparedStatement ps=null;
+		try {
+			ps=conn.prepareStatement("select * from secondcategory where status=1 and fc_id="+fc_id);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				SecondCategory sc=new SecondCategory();
+				sc.setSc_id(rs.getInt("sc_id"));
+				sc.setSc_name(rs.getString("sc_name"));
+				list.add(sc);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 	
 }

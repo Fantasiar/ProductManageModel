@@ -1,23 +1,28 @@
-package com.neuedu.controller.secondCategory;
+package com.neuedu.controller.product;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.neuedu.model.po.FirstCategory;
+import com.neuedu.model.po.SecondCategory;
 import com.neuedu.model.service.CategoryService;
 
 /**
- * Servlet implementation class DeleteSecondCategoryServlet
+ * Servlet implementation class AddProductServlet
  */
-public class DeleteSecondCategoryServlet extends HttpServlet {
+public class AddProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteSecondCategoryServlet() {
+    public AddProductServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,17 +40,21 @@ public class DeleteSecondCategoryServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int operator_id=111;
+	//	System.out.println("enter addpro");
 		request.setCharacterEncoding("utf-8");
-		String[] chks = request.getParameterValues("chk");
-		int[] ids=new int[chks.length];
-		for (int i = 0; i < chks.length; i++) {
-			ids[i]=Integer.parseInt(chks[i]);
+		String action = request.getParameter("action");
+		if ("findSc".equals(action)) {
+			String fc_name = request.getParameter("fc_name");
+			FirstCategory fc=CategoryService.getInstance().getFirstCategoryByName(fc_name);
+			int fc_id = fc.getFc_id();
+			List<SecondCategory> scList=CategoryService.getInstance().searchScByFcId(fc_id);
+			Gson gson=new Gson();
+			String str = gson.toJson(scList);
+		//	System.out.println(str);
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write(str);
+			
 		}
-		
-		CategoryService.getInstance().deleteSecondCategory(ids,operator_id);
-		String pageNum=request.getSession().getAttribute("pageNumSc").toString();
-		response.sendRedirect(request.getContextPath()+"/searchSecondCategoryServlet?action=sc&pageNumSc="+pageNum);
 	}
 
 }
