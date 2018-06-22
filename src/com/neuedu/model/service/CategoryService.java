@@ -154,4 +154,18 @@ public class CategoryService {
 		CategoryDao dao=new CategoryDaoImp(conn);
 		return dao.getSecondCategoryByName(sc_name);
 	}
+
+	public String searchFcNameById(int fc_id) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		CategoryDao dao=new CategoryDaoImp(conn);
+		return dao.searchFcNameById(fc_id);
+	}
+
+	public String searchScNameById(int sc_id) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		CategoryDao dao=new CategoryDaoImp(conn);
+		return dao.searchScNameById(sc_id);
+	}
 }

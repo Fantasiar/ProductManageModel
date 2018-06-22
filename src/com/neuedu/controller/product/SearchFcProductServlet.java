@@ -44,8 +44,6 @@ public class SearchFcProductServlet extends HttpServlet {
 		//获取一级分类下属所有商品
 		String currentPageNumber = request.getParameter("pageNumFcPro");
 		String currentFcId = request.getParameter("fcId");
-		System.out.println(currentFcId);
-		System.out.println(currentPageNumber);
 		String fc_name = request.getParameter("fc_name");
 		int pageNum=1;
 		int fc_id=0;
@@ -63,13 +61,11 @@ public class SearchFcProductServlet extends HttpServlet {
 		List<Product> proList = ProductService.getInstance().searchProductByFc(fc_id,pageNum);
 		int pageCount=ProductService.getInstance().searchFcProPageCount(fc_id);
 		//获取所有一级分类
-		System.out.println(proList.toString());
 		List<FirstCategory> fcList=CategoryService.getInstance().searchAllFc();
 		//请求转发给一级分类下属商品页面
 		request.setAttribute("fcList", fcList);	
 		request.setAttribute("proList", proList);
 		request.setAttribute("pageCount", pageCount);
-		System.out.println(fc_id);
 		request.getSession().setAttribute("fcId", fc_id);
 		request.getSession().setAttribute("pageNumFcPro", pageNum);
 		request.getRequestDispatcher("/FirstCategory/SearchFcProduct.jsp").forward(request, response);

@@ -1,0 +1,5 @@
+2018-06-22 19:31:00,384 WARN  [DefaultSoapUICore] Missing folder [C:\Users\Fantasia Tim\ext] for external libraries
+2018-06-22 19:31:01,509 INFO  [DefaultSoapUICore] initialized soapui-settings from [C:\Users\Fantasia Tim\soapui-settings.xml]
+2018-06-22 19:31:03,484 INFO  [WorkspaceImpl] Loading workspace from [C:\Users\Fantasia Tim\intellij-soapui-workspace.xml]
+2018-06-22 19:31:15,211 INFO  [WorkspaceImpl] Saved workspace to [C:\Users\Fantasia Tim\intellij-soapui-workspace.xml]
+2018-06-22 19:31:15,227 INFO  [DefaultSoapUICore] Settings saved to [C:\Users\Fantasia Tim\soapui-settings.xml]

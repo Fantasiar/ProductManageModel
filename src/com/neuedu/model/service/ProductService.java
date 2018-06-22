@@ -54,6 +54,13 @@ public class ProductService {
 		ProductDao dao=new ProductDaoImp(conn);
 		return dao.searchProductInfo(product_id);
 	}
+
+	public String searchSupNameById(int supplier_id) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		ProductDao dao=new ProductDaoImp(conn);
+		return dao.searchSupNameById(supplier_id);
+	}
 	
 	
 }

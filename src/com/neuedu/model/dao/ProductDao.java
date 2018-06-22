@@ -17,4 +17,6 @@ public interface ProductDao {
 
 	Product searchProductInfo(int product_id);
 
+	String searchSupNameById(int supplier_id);
+
 }

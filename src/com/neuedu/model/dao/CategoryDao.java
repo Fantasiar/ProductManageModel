@@ -42,4 +42,8 @@ public interface CategoryDao {
 
 	SecondCategory getSecondCategoryByName(String sc_name);
 
+	String searchFcNameById(int fc_id);
+
+	String searchScNameById(int sc_id);
+
 }

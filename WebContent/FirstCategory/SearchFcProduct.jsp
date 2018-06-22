@@ -53,7 +53,7 @@
                         </label>
                     </td>
                     <td>
-                    <a href="${pageContext.request.contextPath}/productInfoServlet?product_id=${pro.product_id}">修改</a>
+                    <a href="${pageContext.request.contextPath}/productInfoServlet?product_id=${pro.product_id}">查看</a>
                     </td>
                 </tr>
                 </c:forEach>

@@ -136,20 +136,33 @@ public class ProductDaoImp implements ProductDao{
 		Supplier sup=new Supplier();
 		PreparedStatement ps=null;
 		try {
-			ps=conn.prepareStatement("select p.product_name,p.fc_id,p.sc_id,"
-					+ "f.fc_name,s.sc_name, "
-					+ "p.measure,p.original_price,p.discount,p.cost_price, "
-					+ "p.version,sup.supplier_id,p.publisher,p.shelf_life, "
-					+ "p.remarks from product p,firstcategory f,secondcategory s, "
-					+ "supplier sup where p.supplier_id=sup.supplier_id and "
-					+ "p.fc_id=f.fc_id and f.fc_id=s.fc_id and p.sc_id=s.sc_id and "
-					+ "p.product_id="+product_id);
+//			ps=conn.prepareStatement("select p.product_name,p.fc_id,p.sc_id,"
+//					+ "f.fc_name,s.sc_name, "
+//					+ "p.measure,p.original_price,p.discount,p.cost_price, "
+//					+ "p.version,sup.supplier_id,p.publisher,p.shelf_life, "
+//					+ "p.remarks from product p,firstcategory f,secondcategory s, "
+//					+ "supplier sup where p.supplier_id=sup.supplier_id and "
+//					+ "p.fc_id=f.fc_id and f.fc_id=s.fc_id and p.sc_id=s.sc_id and "
+//					+ "p.product_id="+product_id);
+			ps=conn.prepareStatement("select * from product where product_id="+product_id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				fc.setFc_id(rs.getInt("fc_id"));
-				fc.setFc_name(rs.getString("fc_name"));
-				product.setProduct_id(rs.getInt("product_id"));
+				sc.setSc_id(rs.getInt("sc_id"));
+				sup.setSupplier_id(rs.getInt("supplier_id"));
+				product.setProduct_id(product_id);
 				product.setProduct_name(rs.getString("product_name"));
+				product.setFc(fc);
+				product.setSc(sc);
+				product.setMeasure(rs.getString("measure"));
+				product.setOriginal_price(rs.getDouble("original_price"));
+				product.setDiscount(rs.getDouble("discount"));
+				product.setCost_price(rs.getDouble("cost_price"));
+				product.setVersion(rs.getString("version"));
+				product.setSupplier(sup);
+				product.setPublisher(rs.getString("publisher"));
+				product.setShelf_life(rs.getString("shelf_life"));
+				product.setRemarks(rs.getString("remarks"));
 				
 			}
 		} catch (SQLException e) {
@@ -157,6 +170,24 @@ public class ProductDaoImp implements ProductDao{
 			e.printStackTrace();
 		}
 		return product;
+	}
+
+	@Override
+	public String searchSupNameById(int supplier_id) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps=null;
+		String supplier_name="";
+		try {
+			ps=conn.prepareStatement("select supplier_name from supplier where supplier_id="+supplier_id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				supplier_name=rs.getString("supplier_name");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return supplier_name;
 	}
 	
 }

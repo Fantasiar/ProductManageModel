@@ -16,6 +16,7 @@ import com.neuedu.model.po.SecondCategory;
 import com.neuedu.model.po.Supplier;
 import com.neuedu.utils.DBUtils;
 import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
+import com.sun.org.apache.regexp.internal.recompile;
 
 public class CategoryDaoImp implements CategoryDao{
 	private Connection conn;
@@ -418,6 +419,42 @@ public class CategoryDaoImp implements CategoryDao{
 			e.printStackTrace();
 		}
 		return sc;
+	}
+
+	@Override
+	public String searchFcNameById(int fc_id) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps=null;
+		String fc_name="";
+		try {
+			ps=conn.prepareStatement("select fc_name from firstcategory where fc_id="+fc_id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				fc_name=rs.getString("fc_name");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return fc_name;
+	}
+
+	@Override
+	public String searchScNameById(int sc_id) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps=null;
+		String sc_name="";
+		try {
+			ps=conn.prepareStatement("select sc_name from secondcategory where sc_id="+sc_id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				sc_name=rs.getString("sc_name");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return sc_name;
 	}
 
 	
