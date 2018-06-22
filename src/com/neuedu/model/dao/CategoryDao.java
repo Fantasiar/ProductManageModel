@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.neuedu.model.po.FirstCategory;
 import com.neuedu.model.po.SecondCategory;
+import com.neuedu.model.po.Supplier;
 
 public interface CategoryDao {
 
@@ -36,5 +37,9 @@ public interface CategoryDao {
 	void deleteSecondCategory(int[] ids, int operator_id);
 
 	List<SecondCategory> searchScByFcId(int fc_id);
+
+	List<Supplier> searchAllSup();
+
+	SecondCategory getSecondCategoryByName(String sc_name);
 
 }

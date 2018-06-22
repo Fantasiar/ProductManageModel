@@ -15,20 +15,20 @@
 </head>
 <body>
 <jsp:include page="/index.jsp" />
-<form action="" role="form" class="form-inline">
+<form action="${pageContext.request.contextPath}/searchFcProductServlet" role="form" class="form-inline"  method="post">
     <div class="container" style="margin-top: 30px">
         <div class="row">
             <div class="col-md-7" >
                     <div class="form-group" style="float: right">
-                        <select class="form-control" style="height:40px;width: 200px">
-                            <option>数码</option>
-                            <option>食品</option>
-                            <option>服装</option>
-                        </select>
+                        <select name="fc_name" class="form-control" style="height:40px;">
+                                <c:forEach items="${fcList}" var="fc">
+                                	<option>${fc.fc_name}</option>
+                                </c:forEach>
+                            </select>
                     </div>
             </div>
             <div class="col-md-5">
-                <button class="btn btn-default" style="margin-right: 70px;height: 40px">查询</button>
+                <button type="submit" class="btn btn-default" style="margin-right: 70px;height: 40px">查询</button>
             </div>
         </div>
         <div class="row" style="margin-left: -100px;width: 900px">
@@ -40,62 +40,42 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <c:forEach items="${proList}" var="pro">
+                	<tr>
                     <td>
                         <label style="font-size: 18px">
-                            Tanmay
+                            ${pro.product_id}
                         </label>
                     </td>
                     <td>
                         <label style="font-size: 18px">
-                            Tanmay
-                        </label>
-                    </td>
-                    <td>
-                        <button class="btn btn-default" style="float: right;margin-right: 50px">查看</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label style="font-size: 18px">
-                            Tanmay
-                        </label>
-                    </td>
-                    <td>
-                        <label style="font-size: 18px">
-                            Tanmay
+                            ${pro.product_name}
                         </label>
                     </td>
                     <td>
                         <button class="btn btn-default" style="float: right;margin-right: 50px">查看</button>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <label style="font-size: 18px">
-                            Tanmay
-                        </label>
-                    </td>
-                    <td>
-                        <label style="font-size: 18px">
-                            Tanmay
-                        </label>
-                    </td>
-                    <td>
-                        <button class="btn btn-default" style="float: right;margin-right: 50px">查看</button>
-                    </td>
-                </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>
+        <input type="hidden" value="${fcId}">
         <div class="row">
-            <div class="col-md-1 col-md-offset-2">
-                <label for="">PREVIOUS</label>
-            </div>
-            <div class="col-md-1">
-                <label for="">1  2  3  4  5  6</label>
-            </div>
-            <div class="col-md-1">
+                <div class="col-md-1 col-md-offset-2">
+                    <label for="">PREVIOUS</label>
+                </div>
+                <div class="col-md-1">
+                	<c:forEach begin="1" end="${pageCount}" var="p">
+                		<c:if test="${p==pageNumFcPro}">
+                			<label for="">${p}  </label>
+                		</c:if>
+                		<c:if test="${p!=pageNumFcPro}">
+                			<label for=""><a href="${pageContext.request.contextPath}/searchFcProductServlet?fcId=${fcId}&pageNumFcPro=${p}">${p}  </a></label>
+                		</c:if>
+                	</c:forEach>                    
+                </div>
+                <div class="col-md-1">
                 <label for="">NEXT</label>
             </div>
         </div>

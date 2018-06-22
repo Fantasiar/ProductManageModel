@@ -13,6 +13,7 @@ import org.apache.catalina.core.ApplicationContext;
 
 import com.neuedu.model.po.FirstCategory;
 import com.neuedu.model.po.SecondCategory;
+import com.neuedu.model.po.Supplier;
 import com.neuedu.utils.DBUtils;
 import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
@@ -372,6 +373,51 @@ public class CategoryDaoImp implements CategoryDao{
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	@Override
+	public List<Supplier> searchAllSup() {
+		// TODO Auto-generated method stub
+		List<Supplier> list=new ArrayList<Supplier>();
+		PreparedStatement ps=null;
+		try {
+			ps=conn.prepareStatement("select * from supplier where status=1");
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				Supplier sup=new Supplier();
+				sup.setSupplier_id(rs.getInt("supplier_id"));
+				sup.setSupplier_name(rs.getString("supplier_name"));
+				list.add(sup);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public SecondCategory getSecondCategoryByName(String sc_name) {
+		// TODO Auto-generated method stub
+		SecondCategory sc=new SecondCategory();
+		PreparedStatement ps=null;
+		try {
+			ps=conn.prepareStatement("select * from secondcategory where sc_name=? ");
+			ps.setString(1, sc_name);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				FirstCategory fc=new FirstCategory();
+				fc.setFc_id(rs.getInt("fc_id"));
+				sc.setSc_id(rs.getInt("sc_id"));
+				sc.setSc_name(rs.getString("sc_name"));
+				sc.setSc_info(rs.getString("sc_info"));
+				sc.setFc(fc);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return sc;
 	}
 
 	

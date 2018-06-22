@@ -7,6 +7,7 @@ import com.neuedu.model.dao.CategoryDao;
 import com.neuedu.model.dao.CategoryDaoImp;
 import com.neuedu.model.po.FirstCategory;
 import com.neuedu.model.po.SecondCategory;
+import com.neuedu.model.po.Supplier;
 import com.neuedu.utils.DBUtils;
 
 public class CategoryService {
@@ -138,5 +139,19 @@ public class CategoryService {
 		Connection conn=DBUtils.getConn();
 		CategoryDao dao=new CategoryDaoImp(conn);
 		return dao.searchScByFcId(fc_id);
+	}
+
+	public List<Supplier> searchAllSup() {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		CategoryDao dao=new CategoryDaoImp(conn);
+		return dao.searchAllSup();
+	}
+
+	public SecondCategory getSecondCategoryByName(String sc_name) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		CategoryDao dao=new CategoryDaoImp(conn);
+		return dao.getSecondCategoryByName(sc_name);
 	}
 }

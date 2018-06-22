@@ -11,7 +11,7 @@
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 	$(function() {
-		$("#fcName").blur(function() {
+		$("#fc_name").blur(function() {
 			var fc_name=$(this).val();
 			$.ajax({
 				url:"${pageContext.request.contextPath}/addProductServlet?action=findSc",
@@ -40,17 +40,17 @@
 <div class="container" style="margin-top: 80px">
     <div class="row" >
         <div class="col-md-8 " style="background-color: #D1EEEE;border: 1px solid cornflowerblue;border-radius: 8px;height: 1100px">
-            <form class="form-horizontal" role="form">
+            <form action="${pageContext.request.contextPath}/addProductServlet?action=addPro" class="form-horizontal" role="form" method="post">
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">商品名称</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" name="" placeholder="10个字以内（必填）" style="height:40px">
+                        <input type="text" class="form-control" id="product_name" name="product_name" placeholder="10个字以内（必填）" style="height:40px">
                     </div>
                 </div>
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">商品一级分类</label>
                     <div class="col-md-4">
-                        <select id="fcName" name="fc_name" class="form-control" style="height:40px;">
+                        <select id="fc_name" name="fc_name" class="form-control" style="height:40px;">
                                 <c:forEach items="${fcList}" var="fc">
                                 	<option>${fc.fc_name}</option>
                                 </c:forEach>
@@ -68,55 +68,59 @@
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">计量单位</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" name="" placeholder="10个字以内" style="height:40px">
+                        <input type="text" class="form-control" id="measure" name="measure" placeholder="10个字以内" style="height:40px">
                     </div>
                 </div>
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">原价</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" name="" placeholder="必填" style="height:40px">
+                        <input type="text" class="form-control" id="original_price" name="original_price" placeholder="必填" style="height:40px">
                     </div>
                 </div>
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">商品折扣</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" name="" placeholder="0~1的浮点数（必填）" style="height:40px">
+                        <input type="text" class="form-control" id="discount" name="discount" placeholder="0~1的浮点数（必填）" style="height:40px">
                     </div>
                 </div>
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">成本价</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" name="" placeholder="必填" style="height:40px">
+                        <input type="text" class="form-control" id="cost_price" name="cost_price" placeholder="必填" style="height:40px">
                     </div>
                 </div>
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">型号</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" name="" placeholder="选填" style="height:40px">
+                        <input type="text" class="form-control" id="version" name="version" placeholder="选填" style="height:40px">
                     </div>
                 </div>
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">供应商</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" name="" placeholder="必填" style="height:40px">
+                        <select id="supplier_name" name="supplier_name" class="form-control" style="height:40px;">
+                                <c:forEach items="${supList}" var="sup">
+                                	<option>${sup.supplier_name}</option>
+                                </c:forEach>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">厂商</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" name="" placeholder="必填" style="height:40px">
+                        <input type="text" class="form-control" id="publisher" name="publisher" placeholder="必填" style="height:40px">
                     </div>
                 </div>
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">保质期限</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" name="" placeholder="选填" style="height:40px">
+                        <input type="text" class="form-control" id="shelf_life" name="shelf_life" placeholder="选填" style="height:40px">
                     </div>
                 </div>
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">备注</label>
                     <div class="col-md-6">
-                        <textarea rows="8" style="width: 175px" placeholder="选填"></textarea>
+                        <textarea rows="8" id="remarks" name="remarks" style="width: 175px" placeholder="选填"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
