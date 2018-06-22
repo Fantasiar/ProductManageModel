@@ -126,5 +126,37 @@ public class ProductDaoImp implements ProductDao{
 		}
 		return pagecount;
 	}
+
+	@Override
+	public Product searchProductInfo(int product_id) {
+		// TODO Auto-generated method stub
+		Product product=new Product();
+		FirstCategory fc=new FirstCategory();
+		SecondCategory sc=new SecondCategory();
+		Supplier sup=new Supplier();
+		PreparedStatement ps=null;
+		try {
+			ps=conn.prepareStatement("select p.product_name,p.fc_id,p.sc_id,"
+					+ "f.fc_name,s.sc_name, "
+					+ "p.measure,p.original_price,p.discount,p.cost_price, "
+					+ "p.version,sup.supplier_id,p.publisher,p.shelf_life, "
+					+ "p.remarks from product p,firstcategory f,secondcategory s, "
+					+ "supplier sup where p.supplier_id=sup.supplier_id and "
+					+ "p.fc_id=f.fc_id and f.fc_id=s.fc_id and p.sc_id=s.sc_id and "
+					+ "p.product_id="+product_id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				fc.setFc_id(rs.getInt("fc_id"));
+				fc.setFc_name(rs.getString("fc_name"));
+				product.setProduct_id(rs.getInt("product_id"));
+				product.setProduct_name(rs.getString("product_name"));
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return product;
+	}
 	
 }

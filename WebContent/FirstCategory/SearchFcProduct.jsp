@@ -53,7 +53,7 @@
                         </label>
                     </td>
                     <td>
-                        <button class="btn btn-default" style="float: right;margin-right: 50px">查看</button>
+                    <a href="${pageContext.request.contextPath}/productInfoServlet?product_id=${pro.product_id}">修改</a>
                     </td>
                 </tr>
                 </c:forEach>

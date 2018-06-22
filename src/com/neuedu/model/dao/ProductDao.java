@@ -15,4 +15,6 @@ public interface ProductDao {
 
 	int searchFcProPageCount(int fc_id);
 
+	Product searchProductInfo(int product_id);
+
 }

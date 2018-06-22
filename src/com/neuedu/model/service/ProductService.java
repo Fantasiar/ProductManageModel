@@ -47,6 +47,13 @@ public class ProductService {
 		ProductDao dao=new ProductDaoImp(conn);
 		return dao.searchFcProPageCount(fc_id);
 	}
+
+	public Product searchProductInfo(int product_id) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		ProductDao dao=new ProductDaoImp(conn);
+		return dao.searchProductInfo(product_id);
+	}
 	
 	
 }

@@ -109,4 +109,14 @@
     <servlet-name>SearchFcProductServlet</servlet-name>
     <url-pattern>/searchFcProductServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProductInfoServlet</display-name>
+    <servlet-name>ProductInfoServlet</servlet-name>
+    <servlet-class>com.neuedu.controller.product.ProductInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductInfoServlet</servlet-name>
+    <url-pattern>/productInfoServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
