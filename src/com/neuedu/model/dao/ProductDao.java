@@ -19,4 +19,8 @@ public interface ProductDao {
 
 	String searchSupNameById(int supplier_id);
 
+	List<Product> searchProductBySc(int sc_id, int pageNum);
+
+	int searchScProPageCount(int sc_id);
+
 }

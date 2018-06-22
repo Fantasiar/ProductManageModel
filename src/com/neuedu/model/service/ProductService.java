@@ -61,6 +61,20 @@ public class ProductService {
 		ProductDao dao=new ProductDaoImp(conn);
 		return dao.searchSupNameById(supplier_id);
 	}
+
+	public List<Product> searchProductBySc(int sc_id, int pageNum) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		ProductDao dao=new ProductDaoImp(conn);
+		return dao.searchProductBySc(sc_id,pageNum);
+	}
+
+	public int searchScProPageCount(int sc_id) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		ProductDao dao=new ProductDaoImp(conn);
+		return dao.searchScProPageCount(sc_id);
+	}
 	
 	
 }

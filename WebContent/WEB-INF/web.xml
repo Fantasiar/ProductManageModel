@@ -119,4 +119,14 @@
     <servlet-name>ProductInfoServlet</servlet-name>
     <url-pattern>/productInfoServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SearchScProductServlet</display-name>
+    <servlet-name>SearchScProductServlet</servlet-name>
+    <servlet-class>com.neuedu.controller.product.SearchScProductServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchScProductServlet</servlet-name>
+    <url-pattern>/searchScProductServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

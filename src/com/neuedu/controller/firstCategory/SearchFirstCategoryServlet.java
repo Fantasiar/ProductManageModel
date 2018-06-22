@@ -77,6 +77,11 @@ public class SearchFirstCategoryServlet extends HttpServlet {
 			
 			request.getRequestDispatcher("/FirstCategory/SearchFcProduct.jsp").forward(request, response);
 		    
+		}else if ("scPro".equals(action)) {
+			List<FirstCategory> fcList=CategoryService.getInstance().searchAllFc();
+			request.setAttribute("fcList", fcList);
+			
+			request.getRequestDispatcher("/SecondCategory/SearchScProduct.jsp").forward(request, response);
 		}
 	
 	}

@@ -189,5 +189,58 @@ public class ProductDaoImp implements ProductDao{
 		}
 		return supplier_name;
 	}
+
+	@Override
+	public List<Product> searchProductBySc(int sc_id, int pageNum) {
+		// TODO Auto-generated method stub
+		List<Product> list=new ArrayList<Product>();
+		PreparedStatement ps=null;
+		int pageSize=6;
+		StringBuffer sbf=new StringBuffer("");
+		sbf.append("select * from product where status=1 and sc_id="+sc_id);
+		try {
+			ps=conn.prepareStatement(" select b.* from ( "
+					+ " select a.*,rownum rw from ( "
+					+ sbf.toString() +  "  ) a "
+					+ " where rownum<= "+ (pageSize*pageNum) +" ) b  "
+					+ " where rw>"+ pageSize*(pageNum-1));
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				Product product=new Product();
+				product.setProduct_id(rs.getInt("product_id"));
+				product.setProduct_name(rs.getString("product_name"));
+				list.add(product);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public int searchScProPageCount(int sc_id) {
+		// TODO Auto-generated method stub
+		int count=0;
+		int pageSize=6;
+		PreparedStatement ps=null;
+		try {
+			ps=conn.prepareStatement("select count(*) c from product where status=1 and sc_id="+sc_id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				count=rs.getInt("c");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		int pagecount = 0;
+		if(count%pageSize==0){
+			pagecount = count/pageSize;
+		}else{
+			pagecount = count/pageSize+1;
+		}
+		return pagecount;
+	}
 	
 }
