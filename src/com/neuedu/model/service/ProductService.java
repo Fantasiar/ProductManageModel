@@ -3,6 +3,8 @@ package com.neuedu.model.service;
 import java.sql.Connection;
 import java.util.List;
 
+import com.neuedu.model.dao.CategoryDao;
+import com.neuedu.model.dao.CategoryDaoImp;
 import com.neuedu.model.dao.ProductDao;
 import com.neuedu.model.dao.ProductDaoImp;
 import com.neuedu.model.po.Product;
@@ -74,6 +76,52 @@ public class ProductService {
 		Connection conn=DBUtils.getConn();
 		ProductDao dao=new ProductDaoImp(conn);
 		return dao.searchScProPageCount(sc_id);
+	}
+
+	public List<Product> findAllPageProduct(int pageNum) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		ProductDao dao=new ProductDaoImp(conn);
+		return dao.findAllPageProduct(pageNum);
+	}
+
+	public int findAllPageCount() {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		ProductDao dao=new ProductDaoImp(conn);
+		return dao.findAllPageCount();
+	}
+
+	public List<Product> findProductByName(String product_name, int pageNum) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		ProductDao dao=new ProductDaoImp(conn);
+		return dao.findProductByName(product_name,pageNum);
+	}
+
+	public int findProductPageCount(String product_name) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		ProductDao dao=new ProductDaoImp(conn);
+		return dao.findProductPageCount(product_name);
+	}
+
+	public void updateProduct(Product product, int operator_id) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		DBUtils.beginTrasaction(conn);
+		ProductDao dao=new ProductDaoImp(conn);
+		dao.updateProduct(product,operator_id);
+		DBUtils.commit(conn);
+	}
+
+	public void deleteProduct(int[] ids, int operator_id) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		DBUtils.beginTrasaction(conn);
+		ProductDao dao=new ProductDaoImp(conn);
+		dao.deleteProduct(ids,operator_id);
+		DBUtils.commit(conn);
 	}
 	
 	

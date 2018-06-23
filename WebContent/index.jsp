@@ -15,7 +15,7 @@
 	<li><a href="${pageContext.request.contextPath}/searchSecondCategoryServlet?action=sc">修改/删除二级分类</a></li>
 	<li><a href="${pageContext.request.contextPath}/searchFirstCategoryServlet?action=scPro">查询二级分类下属商品</a></li>
 	<li><a href="${pageContext.request.contextPath}/searchFirstCategoryServlet?action=addPro">新商品登记</a></li>
-	<li><a href="${pageContext.request.contextPath}/searchProductServlet">商品查询</a></li>
+	<li><a href="${pageContext.request.contextPath}/searchProductServlet?action=blank">商品查询</a></li>
 </ul>
 </body>
 </html>

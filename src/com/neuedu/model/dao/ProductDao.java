@@ -23,4 +23,16 @@ public interface ProductDao {
 
 	int searchScProPageCount(int sc_id);
 
+	List<Product> findAllPageProduct(int pageNum);
+
+	int findAllPageCount();
+
+	List<Product> findProductByName(String product_name, int pageNum);
+
+	int findProductPageCount(String product_name);
+
+	void updateProduct(Product product, int operator_id);
+
+	void deleteProduct(int[] ids, int operator_id);
+
 }

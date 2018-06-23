@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -241,6 +242,165 @@ public class ProductDaoImp implements ProductDao{
 			pagecount = count/pageSize+1;
 		}
 		return pagecount;
+	}
+
+	@Override
+	public List<Product> findAllPageProduct(int pageNum) {
+		// TODO Auto-generated method stub
+		List<Product> list=new ArrayList<Product>();
+		PreparedStatement ps=null;
+		int pageSize=6;
+		StringBuffer sbf=new StringBuffer("");
+		sbf.append("select * from product where status=1");
+		try {
+			ps=conn.prepareStatement(" select b.* from ( "
+					+ " select a.*,rownum rw from ( "
+					+ sbf.toString() +  "  ) a "
+					+ " where rownum<= "+ (pageSize*pageNum) +" ) b  "
+					+ " where rw>"+ pageSize*(pageNum-1));
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				Product product=new Product();
+				product.setProduct_id(rs.getInt("product_id"));
+				product.setProduct_name(rs.getString("product_name"));
+				list.add(product);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public int findAllPageCount() {
+		// TODO Auto-generated method stub
+		int count=0;
+		int pageSize=6;
+		PreparedStatement ps=null;
+		try {
+			ps=conn.prepareStatement("select count(*) c from product where status=1");
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				count=rs.getInt("c");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		int pagecount = 0;
+		if(count%pageSize==0){
+			pagecount = count/pageSize;
+		}else{
+			pagecount = count/pageSize+1;
+		}
+		return pagecount;
+	}
+
+	@Override
+	public List<Product> findProductByName(String product_name, int pageNum) {
+		// TODO Auto-generated method stub
+		List<Product> list=new ArrayList<Product>();
+		PreparedStatement ps=null;
+		int pageSize=3;
+		StringBuffer sbf=new StringBuffer("");
+		sbf.append("select * from product where status=1 and product_name like ? ");
+		try {
+			ps=conn.prepareStatement(" select b.* from ( "
+					+ " select a.*,rownum rw from ( "
+					+ sbf.toString() +  "  ) a "
+					+ " where rownum<= "+ (pageSize*pageNum) +" ) b  "
+					+ " where rw>"+ pageSize*(pageNum-1));
+			ps.setString(1, "%"+product_name+"%");
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				Product product=new Product();
+				product.setProduct_id(rs.getInt("product_id"));
+				product.setProduct_name(rs.getString("product_name"));
+				list.add(product);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public int findProductPageCount(String product_name) {
+		// TODO Auto-generated method stub
+		int count=0;
+		int pageSize=3;
+		PreparedStatement ps=null;
+		try {
+			ps=conn.prepareStatement("select count(*) c from product where status=1 and product_name like ? ");
+			ps.setString(1, "%"+product_name+"%");
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				count=rs.getInt("c");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		int pagecount = 0;
+		if(count%pageSize==0){
+			pagecount = count/pageSize;
+		}else{
+			pagecount = count/pageSize+1;
+		}
+		return pagecount;
+	}
+
+	@Override
+	public void updateProduct(Product product, int operator_id) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps=null;
+		Date operator_date = new Date();
+		try {
+			ps=conn.prepareStatement("update product set product_name=?,fc_id=?,sc_id=?,measure=?,original_price=?,discount=?,cost_price=?,version=?,supplier_id=?,publisher=?,shelf_life=?,remarks=?,operator_id=?,operator_date=? where product_id=? ");
+			ps.setString(1, product.getProduct_name());
+			ps.setInt(2, product.getFc().getFc_id());
+			ps.setInt(3, product.getSc().getSc_id());
+			ps.setString(4, product.getMeasure());
+			ps.setDouble(5, product.getOriginal_price());
+			ps.setDouble(6, product.getDiscount());
+			ps.setDouble(7, product.getCost_price());
+			ps.setString(8, product.getVersion());
+			ps.setInt(9, product.getSupplier().getSupplier_id());
+			ps.setString(10, product.getPublisher());
+			ps.setString(11, product.getShelf_life());
+			ps.setString(12, product.getRemarks());
+			ps.setInt(13, operator_id);
+			ps.setDate(14, new java.sql.Date(operator_date.getTime()));
+			ps.setInt(15, product.getProduct_id());
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			DBUtils.closePS(ps);
+		}
+	}
+
+	@Override
+	public void deleteProduct(int[] ids, int operator_id) {
+		// TODO Auto-generated method stub
+		String id=Arrays.toString(ids).replace('[','(').replace(']',')');
+		PreparedStatement ps=null;
+		Date operator_date = new Date();
+		try {
+			ps=conn.prepareStatement("update product set status=0,operator_id=?,operator_date=?"+
+			" where product_id in "+id);
+			ps.setInt(1, operator_id);
+			ps.setDate(2, new java.sql.Date(operator_date.getTime()));
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			DBUtils.closePS(ps);
+		}
 	}
 	
 }

@@ -53,7 +53,6 @@ public class AddProductServlet extends HttpServlet {
 			List<SecondCategory> scList=CategoryService.getInstance().searchScByFcId(fc_id);
 			Gson gson=new Gson();
 			String str = gson.toJson(scList);
-		//	System.out.println(str);
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(str);
 			

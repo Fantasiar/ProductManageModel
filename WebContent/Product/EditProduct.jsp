@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE>
 <html lang="en">
 <head>
@@ -8,90 +9,124 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		$("#fc_name").blur(function() {
+			var fc_name=$(this).val();
+			$.ajax({
+				url:"${pageContext.request.contextPath}/addProductServlet?action=findSc",
+				async:false,
+				type:"POST",
+				data:{"fc_name":fc_name},
+				success:function(data){
+					var con="";
+					$.each(data,function(i,sc){
+					con+="<option>"+sc.sc_name+"</option>"
+					});
+					$("#sc_name").html(con);
+				},
+				error:function(){
+					alert("获取二级分类失败");
+				},
+				dataType:"json"
+			});
+		});
+			
+	})
+	</script>
 </head>
 <body>
+<jsp:include page="/index.jsp" />
 <div class="container" style="margin-top: 80px">
     <div class="row" >
         <div class="col-md-8 " style="background-color: #D1EEEE;border: 1px solid cornflowerblue;border-radius: 8px;height: 1100px">
-            <form class="form-horizontal" role="form">
+            <form action="${pageContext.request.contextPath}/editProductServlet?action=update" class="form-horizontal" role="form" method="post">
+                <input type="hidden" name="product_id" value="product_id">
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">商品名称</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" name="" style="height:40px" value="小米8">
+                        <input type="text" class="form-control" id="product_name" name="product_name" style="height:40px" value="${product.product_name}">
                     </div>
                 </div>
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">商品一级分类</label>
                     <div class="col-md-4">
-                        <select class="form-control" style="height:40px;">
-                            <option>数码</option>
-                            <option>食品</option>
-                            <option>服装</option>
+                        <select id="fc_name" name="fc_name" class="form-control" style="height:40px;">
+                               <option selected="selected">${product.getFc().fc_name}</option> 
+                                <c:forEach items="${fcList}" var="fc">
+                                <c:if test="${fc.fc_name ne product.getFc().fc_name}"></c:if>
+                                	<option>${fc.fc_name}</option>
+                                </c:forEach>
                         </select>
                     </div>
                 </div>
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">商品二级分类</label>
                     <div class="col-md-4">
-                        <select class="form-control" style="height:40px;">
-                            <option>手机</option>
-                            <option>食品</option>
-                            <option>服装</option>
+                        <select id="sc_name" name="sc_name" class="form-control" style="height:40px;">
+                            <option selected="selected">${product.getSc().sc_name}</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">计量单位</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" name="" style="height:40px" value="台">
+                        <input type="text" class="form-control" id="measure" name="measure" style="height:40px" value="${product.measure}">
                     </div>
                 </div>
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">原价</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" name=""  style="height:40px" value="2699.0">
+                        <input type="text" class="form-control" id="original_price" name="original_price"  style="height:40px" value="${product.original_price}">
                     </div>
                 </div>
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">商品折扣</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" name="" style="height:40px" value="0.85">
+                        <input type="text" class="form-control" id="discount" name="discount" style="height:40px" value="${product.discount}">
                     </div>
                 </div>
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">成本价</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" name="" style="height:40px" value="2299.0">
+                        <input type="text" class="form-control" id="cost_price" name="cost_price" style="height:40px" value="${product.cost_price}">
                     </div>
                 </div>
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">型号</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" name="" style="height:40px" value="4+64G">
+                        <input type="text" class="form-control" id="version" name="version" style="height:40px" value="${product.version}">
                     </div>
                 </div>
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">供应商</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" name="" style="height:40px" value="富士康">
+                        <select id="supplier_name" name="supplier_name" class="form-control" style="height:40px;">
+                                <option selected="selected">${product.getSupplier().supplier_name}</option>   
+                                <c:forEach items="${supList}" var="sup">
+               						<c:if test="${sup.supplier_name ne product.getSupplier().supplier_name}">
+                                	    	<option>${sup.supplier_name}</option>
+                                	    </c:if>                 
+                                </c:forEach>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">厂商</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" name="" style="height:40px" value="小米科技有限公司">
+                        <input type="text" class="form-control" id="publisher" name="publisher" style="height:40px" value="${product.publisher}">
                     </div>
                 </div>
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">保质期限</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" name="" style="height:40px" value="2年">
+                        <input type="text" class="form-control" id="shelf_life" name="shelf_life" style="height:40px" value="${product.shelf_life}">
                     </div>
                 </div>
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">备注</label>
                     <div class="col-md-6">
-                        <textarea rows="8" style="width: 175px" >最便宜的骁龙845手机</textarea>
+                        <textarea name="remarks" rows="8" style="width: 175px" >${product.remarks}</textarea>
                     </div>
                 </div>
                 <div class="form-group">
