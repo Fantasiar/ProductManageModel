@@ -424,5 +424,25 @@ public class ProductDaoImp implements ProductDao{
 		}
 		return product_id;
 	}
+
+	@Override
+	public int checkProductName(String product_name) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps=null;
+		int count=0;
+//		System.out.println(sc_name);
+		try {
+			ps=conn.prepareStatement("select count(*) c from product where product_name=?");
+			ps.setString(1, product_name);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				count=rs.getInt("c");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
 	
 }

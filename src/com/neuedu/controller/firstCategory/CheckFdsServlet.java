@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.neuedu.model.service.CategoryService;
+import com.neuedu.model.service.ProductService;
 
 /**
  * Servlet implementation class CheckFdsServlet
@@ -41,11 +42,16 @@ public class CheckFdsServlet extends HttpServlet {
 		if ("addFc".equals(action)) {
 			String fc_name = request.getParameter("fc_name");
 			boolean isExist=CategoryService.getInstance().checkFcName(fc_name);
-			System.out.println(isExist);
+	//		System.out.println(isExist);
 			response.getWriter().write("{\"isExist\":"+isExist+"}");
 		}else if ("addSc".equals(action)) {
 			String sc_name = request.getParameter("sc_name");
 			boolean isExist=CategoryService.getInstance().checkScName(sc_name);
+		//	System.out.println(isExist);
+			response.getWriter().write("{\"isExist\":"+isExist+"}");
+		}else if ("addPro".equals(action)) {
+			String product_name = request.getParameter("product_name");
+			boolean isExist=ProductService.getInstance().checkProductName(product_name);
 			System.out.println(isExist);
 			response.getWriter().write("{\"isExist\":"+isExist+"}");
 		}

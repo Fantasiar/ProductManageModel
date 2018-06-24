@@ -37,4 +37,6 @@ public interface ProductDao {
 
 	int searchProductIdByName(String product_name);
 
+	int checkProductName(String product_name);
+
 }

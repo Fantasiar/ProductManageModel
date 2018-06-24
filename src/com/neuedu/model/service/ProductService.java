@@ -130,6 +130,14 @@ public class ProductService {
 		ProductDao dao=new ProductDaoImp(conn);
 		return dao.searchProductIdByName(product_name);
 	}
+
+	public boolean checkProductName(String product_name) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		ProductDao dao=new ProductDaoImp(conn);
+		int isExist=dao.checkProductName(product_name);
+		return isExist>0?true:false;
+	}
 	
 	
 }

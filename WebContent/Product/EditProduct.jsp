@@ -32,6 +32,34 @@
 			});
 		});
 			
+		$("#product_name").blur(function() {
+			var product_name=$(this).val();
+			$.ajax({
+				url:"${pageContext.request.contextPath}/checkFdsServlet?action=addPro",
+				async:false,
+				type:"POST",
+				data:{"product_name":product_name},
+				success:function(data){
+					var isExist=data.isExist;
+					var checkInfo="";
+					if(isExist){
+						//该用户存在
+						checkInfo = "该商品名已经存在";
+						$("#checkPro").css("color","red");
+						$("#subtn").attr("disabled",true);
+					}else{
+						checkInfo = "该商品名可以使用"
+						$("#checkPro").css("color","green");
+						$("#subtn").attr("disabled",false);
+					}
+					$("#checkPro").html(checkInfo);
+				},
+				error:function(){
+					alert("查询商品名失败");
+				},
+				dataType:"json"
+			});
+		});
 	})
 	</script>
 </head>
@@ -46,6 +74,7 @@
                     <label for="" class="col-md-4 control-label" style="font-size:20px">商品名称</label>
                     <div class="col-md-4">
                         <input type="text" class="form-control" id="product_name" name="product_name" style="height:40px" value="${product.product_name}">
+                    	<span id="checkPro" style="float: right;margin-top: -30px;margin-right: -130px"></span>
                     </div>
                 </div>
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
@@ -131,7 +160,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10" style="margin-left: 310px">
-                        <button type="submit" class="btn btn-default" style="margin-right: 20px">修改</button>
+                        <button id="subtn" type="submit" class="btn btn-default" style="margin-right: 20px">修改</button>
                         <button  class="btn btn-default">返回</button>
                     </div>
                 </div>

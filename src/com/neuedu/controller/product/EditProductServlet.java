@@ -55,6 +55,7 @@ public class EditProductServlet extends HttpServlet {
 	private void doUpdateProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// TODO Auto-generated method stub
 		int operator_id=110;
+		
 		String product_id = request.getParameter("product_id");
 		String product_name = request.getParameter("product_name");
 		String fc_name = request.getParameter("fc_name");
@@ -89,7 +90,7 @@ public class EditProductServlet extends HttpServlet {
 		product.setRemarks(remarks);
 		
 		ProductService.getInstance().updateProduct(product,operator_id);
-		response.sendRedirect(request.getContextPath()+"/Product/SearchProduct.jsp");
+		response.sendRedirect(request.getContextPath()+"/searchProductServlet?product_id="+product_id);
 	}
 
 	private void doEditProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
