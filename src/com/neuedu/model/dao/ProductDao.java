@@ -27,12 +27,14 @@ public interface ProductDao {
 
 	int findAllPageCount();
 
-	List<Product> findProductByName(String product_name, int pageNum);
+	List<Product> findProductByName(int product_id, int pageNum);
 
-	int findProductPageCount(String product_name);
+	int findProductPageCount(int product_id);
 
 	void updateProduct(Product product, int operator_id);
 
 	void deleteProduct(int[] ids, int operator_id);
+
+	int searchProductIdByName(String product_name);
 
 }

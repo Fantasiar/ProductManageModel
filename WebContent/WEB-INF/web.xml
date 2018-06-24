@@ -157,4 +157,14 @@
     <servlet-name>DeleteProductServlet</servlet-name>
     <url-pattern>/deleteProductServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CheckFdsServlet</display-name>
+    <servlet-name>CheckFdsServlet</servlet-name>
+    <servlet-class>com.neuedu.controller.firstCategory.CheckFdsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckFdsServlet</servlet-name>
+    <url-pattern>/checkFdsServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

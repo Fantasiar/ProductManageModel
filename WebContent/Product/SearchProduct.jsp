@@ -28,6 +28,7 @@
 			alert("请至少选择一个用户进行删除");
 		}
 	}
+	
 	</script>
 </head>
 <body>
@@ -73,7 +74,7 @@
                 </tbody>
             </table>
         </div>
-        <input type="text" value="${product_name}" >
+        
         <div class="row">
                 <div class="col-md-1 col-md-offset-2">
                     <label for="">PREVIOUS</label>
@@ -84,7 +85,7 @@
                 			<label for="">${p}  </label>
                 		</c:if>
                 		<c:if test="${p!=pageNumPro}">
-                			<label  for=""><a href="${pageContext.request.contextPath}/searchProductServlet?product_name=${product_name}&pageNumPro=${p}">${p}  </a></label>
+                			<label for=""><a href="${pageContext.request.contextPath}/searchProductServlet?product_id=${product_id}&pageNumPro=${p}">${p}  </a></label>
                 		</c:if>
                 	</c:forEach>                    
                 </div>
@@ -92,6 +93,7 @@
                 <label for="">NEXT</label>
             </div>
         </div>
+
     </div>
 </form>
 </body>

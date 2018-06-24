@@ -457,5 +457,44 @@ public class CategoryDaoImp implements CategoryDao{
 		return sc_name;
 	}
 
+	@Override
+	public int checkFcName(String fc_name) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps=null;
+		int count=0;
+		try {
+			ps=conn.prepareStatement("select count(*) c from firstcategory where fc_name=?");
+			ps.setString(1, fc_name);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				count=rs.getInt("c");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
+
+	@Override
+	public int checkScName(String sc_name) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps=null;
+		int count=0;
+//		System.out.println(sc_name);
+		try {
+			ps=conn.prepareStatement("select count(*) c from secondcategory where sc_name=?");
+			ps.setString(1, sc_name);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				count=rs.getInt("c");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
+
 	
 }

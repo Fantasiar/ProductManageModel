@@ -41,7 +41,7 @@
     <div class="row" >
         <div class="col-md-8 " style="background-color: #D1EEEE;border: 1px solid cornflowerblue;border-radius: 8px;height: 1100px">
             <form action="${pageContext.request.contextPath}/editProductServlet?action=update" class="form-horizontal" role="form" method="post">
-                <input type="hidden" name="product_id" value="product_id">
+                <input type="hidden" name="product_id" value="${product.product_id}">
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">
                     <label for="" class="col-md-4 control-label" style="font-size:20px">商品名称</label>
                     <div class="col-md-4">

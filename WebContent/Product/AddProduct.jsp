@@ -31,8 +31,11 @@
 				dataType:"json"
 			});
 		});
+		
+		
 			
 	})
+	
 	</script>
 </head>
 <body>
@@ -45,6 +48,7 @@
                     <label for="" class="col-md-4 control-label" style="font-size:20px">商品名称</label>
                     <div class="col-md-4">
                         <input type="text" class="form-control" id="product_name" name="product_name" placeholder="10个字以内（必填）" style="height:40px">
+                    	<span id="pname" style="color: red;"></span>
                     </div>
                 </div>
                 <div class="form-group" style="margin-left: 150px;margin-top: 25px">

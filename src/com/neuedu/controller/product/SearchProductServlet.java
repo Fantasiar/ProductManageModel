@@ -43,11 +43,12 @@ public class SearchProductServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
 		String action = request.getParameter("action");
+		
 		String currentPageNumber = request.getParameter("pageNumPro");
 		int pageNum=1;
-	
+		int product_id=0;
 //		Strng product_name=new String((String)session.getAttribute("product_name").getBytes("ISO-8859-1"));
-		String product_name=request.getParameter("product_name");
+		
 		List<Product> proList = new ArrayList<Product>();
 		int pageCount=0;
 		if ("blank".equals(action)) {
@@ -55,25 +56,29 @@ public class SearchProductServlet extends HttpServlet {
 				pageCount=ProductService.getInstance().findAllPageCount();
 				
 		}else {
-			if ("".equals(product_name)) {
+			String product_name=request.getParameter("product_name");
+			product_id = ProductService.getInstance().searchProductIdByName(product_name);
+			if (product_id != 0) {
+				if (currentPageNumber != null && !"".equals(currentPageNumber )) {
+					pageNum=Integer.parseInt(currentPageNumber);
+				}
+//					System.out.println(pageNum);
+//					System.out.println(product_name);
+					proList = ProductService.getInstance().findProductByName(product_id,pageNum);
+					pageCount=ProductService.getInstance().findProductPageCount(product_id);
+					System.out.println(proList);
+				
+			}else {
 				if (currentPageNumber != null && !"".equals(currentPageNumber)) {
 					pageNum=Integer.parseInt(currentPageNumber);
 				}
 				proList = ProductService.getInstance().findAllPageProduct(pageNum);
 				pageCount=ProductService.getInstance().findAllPageCount();
-			}else {
-				if (currentPageNumber != null && !"".equals(currentPageNumber ) && Integer.parseInt(currentPageNumber)!=1) {
-					pageNum=Integer.parseInt(currentPageNumber);
-				}
-//					System.out.println(pageNum);
-//					System.out.println(product_name);
-					proList = ProductService.getInstance().findProductByName(product_name,pageNum);
-					pageCount=ProductService.getInstance().findProductPageCount(product_name);
-					System.out.println(proList);
+			
 			}
 			
 		}
-		request.getSession().setAttribute("product_name", product_name);
+		request.getSession().setAttribute("product_id", product_id);
 		request.setAttribute("proList", proList);	
 		request.setAttribute("pageCount", pageCount);
 		request.getSession().setAttribute("pageNumPro", pageNum);

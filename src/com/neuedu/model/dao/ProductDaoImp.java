@@ -298,20 +298,20 @@ public class ProductDaoImp implements ProductDao{
 	}
 
 	@Override
-	public List<Product> findProductByName(String product_name, int pageNum) {
+	public List<Product> findProductByName(int product_id, int pageNum) {
 		// TODO Auto-generated method stub
 		List<Product> list=new ArrayList<Product>();
 		PreparedStatement ps=null;
 		int pageSize=3;
 		StringBuffer sbf=new StringBuffer("");
-		sbf.append("select * from product where status=1 and product_name like ? ");
+		sbf.append("select * from product where status=1 and product_id=?");
 		try {
 			ps=conn.prepareStatement(" select b.* from ( "
 					+ " select a.*,rownum rw from ( "
 					+ sbf.toString() +  "  ) a "
 					+ " where rownum<= "+ (pageSize*pageNum) +" ) b  "
 					+ " where rw>"+ pageSize*(pageNum-1));
-			ps.setString(1, "%"+product_name+"%");
+			ps.setInt(1, product_id);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) {
 				Product product=new Product();
@@ -327,14 +327,14 @@ public class ProductDaoImp implements ProductDao{
 	}
 
 	@Override
-	public int findProductPageCount(String product_name) {
+	public int findProductPageCount(int product_id) {
 		// TODO Auto-generated method stub
 		int count=0;
 		int pageSize=3;
 		PreparedStatement ps=null;
 		try {
-			ps=conn.prepareStatement("select count(*) c from product where status=1 and product_name like ? ");
-			ps.setString(1, "%"+product_name+"%");
+			ps=conn.prepareStatement("select count(*) c from product where status=1 and product_id=?");
+			ps.setInt(1, product_id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				count=rs.getInt("c");
@@ -358,7 +358,10 @@ public class ProductDaoImp implements ProductDao{
 		PreparedStatement ps=null;
 		Date operator_date = new Date();
 		try {
-			ps=conn.prepareStatement("update product set product_name=?,fc_id=?,sc_id=?,measure=?,original_price=?,discount=?,cost_price=?,version=?,supplier_id=?,publisher=?,shelf_life=?,remarks=?,operator_id=?,operator_date=? where product_id=? ");
+//			System.out.println(product.getProduct_name()+" "+product.getFc().getFc_id()+" "+product.getMeasure()+" "+product.getOriginal_price()+
+//					" "+product.getDiscount()+" "+product.getCost_price()+" "+product.getVersion()+
+//					" "+product.getSupplier().getSupplier_id()+" "+product.getPublisher()+" "+product.getShelf_life()+" "+product.getRemarks()+" "+product.getProduct_id()+" "+operator_id+" "+operator_date.getTime());
+			ps=conn.prepareStatement("update product set product_name=? , fc_id=? , sc_id=? , measure=? , original_price=? , discount=? , cost_price=? , version=? , supplier_id=? , publisher=? , shelf_life=? , remarks=? , operator_id=? , operator_date=? where product_id=? ");
 			ps.setString(1, product.getProduct_name());
 			ps.setInt(2, product.getFc().getFc_id());
 			ps.setInt(3, product.getSc().getSc_id());
@@ -401,6 +404,25 @@ public class ProductDaoImp implements ProductDao{
 		}finally {
 			DBUtils.closePS(ps);
 		}
+	}
+
+	@Override
+	public int searchProductIdByName(String product_name) {
+		// TODO Auto-generated method stub
+		int product_id=0;
+		PreparedStatement ps=null;
+		try {
+			ps=conn.prepareStatement("select product_id from product where product_name=? ");
+			ps.setString(1, product_name);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				product_id=rs.getInt("product_id");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return product_id;
 	}
 	
 }

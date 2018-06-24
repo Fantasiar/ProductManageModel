@@ -46,4 +46,8 @@ public interface CategoryDao {
 
 	String searchScNameById(int sc_id);
 
+	int checkFcName(String fc_name);
+
+	int checkScName(String sc_name);
+
 }

@@ -92,18 +92,18 @@ public class ProductService {
 		return dao.findAllPageCount();
 	}
 
-	public List<Product> findProductByName(String product_name, int pageNum) {
+	public List<Product> findProductByName(int product_id, int pageNum) {
 		// TODO Auto-generated method stub
 		Connection conn=DBUtils.getConn();
 		ProductDao dao=new ProductDaoImp(conn);
-		return dao.findProductByName(product_name,pageNum);
+		return dao.findProductByName(product_id,pageNum);
 	}
 
-	public int findProductPageCount(String product_name) {
+	public int findProductPageCount(int product_id) {
 		// TODO Auto-generated method stub
 		Connection conn=DBUtils.getConn();
 		ProductDao dao=new ProductDaoImp(conn);
-		return dao.findProductPageCount(product_name);
+		return dao.findProductPageCount(product_id);
 	}
 
 	public void updateProduct(Product product, int operator_id) {
@@ -122,6 +122,13 @@ public class ProductService {
 		ProductDao dao=new ProductDaoImp(conn);
 		dao.deleteProduct(ids,operator_id);
 		DBUtils.commit(conn);
+	}
+
+	public int searchProductIdByName(String product_name) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		ProductDao dao=new ProductDaoImp(conn);
+		return dao.searchProductIdByName(product_name);
 	}
 	
 	

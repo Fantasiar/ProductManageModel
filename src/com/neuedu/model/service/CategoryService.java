@@ -168,4 +168,20 @@ public class CategoryService {
 		CategoryDao dao=new CategoryDaoImp(conn);
 		return dao.searchScNameById(sc_id);
 	}
+
+	public boolean checkFcName(String fc_name) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		CategoryDao dao=new CategoryDaoImp(conn);
+		int isExist=dao.checkFcName(fc_name);
+		return isExist>0?true:false;
+	}
+
+	public boolean checkScName(String sc_name) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		CategoryDao dao=new CategoryDaoImp(conn);
+		int isExist=dao.checkScName(sc_name);
+		return isExist>0?true:false;
+	}
 }

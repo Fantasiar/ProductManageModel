@@ -9,6 +9,39 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		$("#sc_name").blur(function() {
+			var sc_name=$(this).val();
+			$.ajax({
+				url:"${pageContext.request.contextPath}/checkFdsServlet?action=addSc",
+				async:false,
+				type:"POST",
+				data:{"sc_name":sc_name},
+				success:function(data){
+					var isExist=data.isExist;
+					var checkInfo="";
+					if(isExist){
+						//该用户存在
+						checkInfo = "该类名已经存在";
+						$("#checkSc").css("color","red");
+						$("#subtn").attr("disabled",true);
+					}else{
+						checkInfo = "该类名可以使用"
+						$("#checkSc").css("color","green");
+						$("#subtn").attr("disabled",false);
+					}
+					$("#checkSc").html(checkInfo);
+				},
+				error:function(){
+					alert("查询二级类名失败");
+				},
+				dataType:"json"
+			});
+		});
+	});
+	
+	</script>
 </head>
 <body>
 <jsp:include page="/index.jsp" />
@@ -31,7 +64,8 @@
                     </div>
                     <div class="col-md-4" style="margin-left: 30px">
                         <div class="form-group">
-                            <input name="sc_name" type="text" class="form-control" placeholder="6个字以内" style="width:200px;height: 40px;border-radius: 6px;">
+                            <input id="sc_name" name="sc_name" type="text" class="form-control" placeholder="请输入二级类名（6个字以内）" style="width:200px;height: 40px;border-radius: 6px;">
+                        	<span id="checkSc" style="float: right;margin-top: -30px;margin-right: -90px"></span>
                         </div>
                     </div>
                 </div>
@@ -39,7 +73,7 @@
                     <textarea name="sc_info" class="form-control" rows="8" placeholder="请输入该分类的描述信息(25个字以内)" style="width:500px;border-radius: 6px;margin-left: 115px"></textarea>
                 </div>
                 <div class="form-group" style="margin-top: 30px">
-                    <button type="submit" class="btn btn-default" style="margin-left: 320px">添加</button>
+                    <button id="subtn" type="submit" class="btn btn-default" style="margin-left: 320px">添加</button>
                 </div>
             </form>
         </div>

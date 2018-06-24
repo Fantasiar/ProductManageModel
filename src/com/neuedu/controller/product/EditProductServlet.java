@@ -55,6 +55,7 @@ public class EditProductServlet extends HttpServlet {
 	private void doUpdateProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// TODO Auto-generated method stub
 		int operator_id=110;
+		String product_id = request.getParameter("product_id");
 		String product_name = request.getParameter("product_name");
 		String fc_name = request.getParameter("fc_name");
 		String sc_name = request.getParameter("sc_name");
@@ -73,6 +74,7 @@ public class EditProductServlet extends HttpServlet {
 		SecondCategory sc = CategoryService.getInstance().getSecondCategoryByName(sc_name);
 		Supplier sup = ProductService.getInstance().getSupplierByName(supplier_name);
 		Product product=new Product();
+		product.setProduct_id(Integer.parseInt(product_id));
 		product.setProduct_name(product_name);
 		product.setFc(fc);
 		product.setSc(sc);
