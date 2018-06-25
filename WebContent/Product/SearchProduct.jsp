@@ -37,7 +37,7 @@
     <div class="container" style="margin-top: 30px">
         <div class="row">
             <div class="form-group" style="margin-left:500px ">
-                <input type="text" class="form-control" id="product_name" name="product_name" placeholder="选填" style="height:40px;width: 200px">
+                <input type="text" maxlength="10" class="form-control" id="product_name" name="product_name" placeholder="请输入商品名称" style="height:40px;width: 200px">
                 <button class="btn btn-default" style="margin-right: 50px">查询</button>
             </div>
         </div>

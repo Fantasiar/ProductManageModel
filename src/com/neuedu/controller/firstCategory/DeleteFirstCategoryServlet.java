@@ -36,13 +36,15 @@ public class DeleteFirstCategoryServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int operator_id=111;
+		
 		request.setCharacterEncoding("utf-8");
 		String[] chks = request.getParameterValues("chk");
 		int[] ids=new int[chks.length];
 		for (int i = 0; i < chks.length; i++) {
 			ids[i]=Integer.parseInt(chks[i]);
 		}
-		
+	//	scCount = CategoryService.getInstance().getCountOfScInFc(ids);
+		System.out.println("delete");
 		CategoryService.getInstance().deleteFirstCategory(ids,operator_id);
 		String pageNum=request.getSession().getAttribute("pageNumFc").toString();
 		response.sendRedirect(request.getContextPath()+"/searchFirstCategoryServlet?action=fc&pageNumFc="+pageNum);

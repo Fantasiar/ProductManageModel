@@ -90,7 +90,12 @@ public class EditProductServlet extends HttpServlet {
 		product.setRemarks(remarks);
 		
 		ProductService.getInstance().updateProduct(product,operator_id);
-		response.sendRedirect(request.getContextPath()+"/searchProductServlet?product_id="+product_id);
+		try {
+			request.getRequestDispatcher("/searchProductServlet?product_id="+product_id).forward(request, response);
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
 	}
 
 	private void doEditProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

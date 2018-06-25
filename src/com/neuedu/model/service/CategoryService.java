@@ -184,4 +184,12 @@ public class CategoryService {
 		int isExist=dao.checkScName(sc_name);
 		return isExist>0?true:false;
 	}
+
+	public boolean getCountOfScInFc(int[] ids) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		CategoryDao dao=new CategoryDaoImp(conn);
+		int isDelete=dao.getCountOfScInFc(ids);
+		return isDelete==0?true:false;
+	}
 }

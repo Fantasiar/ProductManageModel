@@ -496,5 +496,26 @@ public class CategoryDaoImp implements CategoryDao{
 		return count;
 	}
 
+	@Override
+	public int getCountOfScInFc(int[] ids) {
+		// TODO Auto-generated method stub
+		String id=Arrays.toString(ids).replace('[','(').replace(']',')');
+		PreparedStatement ps=null;
+		int count=0;
+//		System.out.println(sc_name);
+		try {
+			ps=conn.prepareStatement("select count(*) c from secondcategory s,firstcategory f where f.fc_id=s.fc_id and f.status=1 and s.status=1 and f.fc_id in "+id);
+			
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				count=rs.getInt("c");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
+
 	
 }

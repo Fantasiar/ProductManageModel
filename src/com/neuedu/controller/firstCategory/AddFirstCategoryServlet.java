@@ -36,6 +36,7 @@ public class AddFirstCategoryServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//…Ë÷√÷–Œƒ±‡¬Î
 		request.setCharacterEncoding("utf-8");
 	//	System.out.println(fc_name+" "+fc_info);
 		

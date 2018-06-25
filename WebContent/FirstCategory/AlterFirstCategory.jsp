@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
 	<script type="text/javascript">
+	
 	function deleteFirstCategory(){
 		var chks=document.getElementsByName("chk");
 		var flag=false;
@@ -47,7 +49,7 @@
                     	<tr>
                         <td>
                             <label style="font-size: 18px">
-                                <input type="checkbox" name="chk" value="${fc.fc_id}" style="margin-right: 10px">${fc.fc_name}
+                                <input type="checkbox" id="chk" name="chk" value="${fc.fc_id}" style="margin-right: 10px">${fc.fc_name}
                             </label>
                         </td>
                         <td>
