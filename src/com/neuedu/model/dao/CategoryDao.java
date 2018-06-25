@@ -50,6 +50,6 @@ public interface CategoryDao {
 
 	int checkScName(String sc_name);
 
-	int getCountOfScInFc(int[] ids);
+	int getCountOfScInFc(int fc_id);
 
 }

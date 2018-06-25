@@ -54,6 +54,11 @@ public class SearchProductServlet extends HttpServlet {
 		if ("blank".equals(action)) {
 				proList = ProductService.getInstance().findAllPageProduct(pageNum);
 				pageCount=ProductService.getInstance().findAllPageCount();
+				for (Product pro : proList) {
+					int pro_id = pro.getProduct_id();
+					boolean isDelete=ProductService.getInstance().checkProDelete(pro_id);
+					pro.setDelete(isDelete);
+				}
 				
 		}else {
 			String product_name=request.getParameter("product_name");
@@ -66,7 +71,11 @@ public class SearchProductServlet extends HttpServlet {
 //					System.out.println(product_name);
 					proList = ProductService.getInstance().findProductByName(product_id,pageNum);
 					pageCount=ProductService.getInstance().findProductPageCount(product_id);
-					System.out.println(proList);
+					for (Product pro : proList) {
+						int pro_id = pro.getProduct_id();
+						boolean isDelete=ProductService.getInstance().checkProDelete(pro_id);
+						pro.setDelete(isDelete);
+					}
 				
 			}else {
 				if (currentPageNumber != null && !"".equals(currentPageNumber)) {
@@ -74,7 +83,11 @@ public class SearchProductServlet extends HttpServlet {
 				}
 				proList = ProductService.getInstance().findAllPageProduct(pageNum);
 				pageCount=ProductService.getInstance().findAllPageCount();
-			
+				for (Product pro : proList) {
+					int pro_id = pro.getProduct_id();
+					boolean isDelete=ProductService.getInstance().checkProDelete(pro_id);
+					pro.setDelete(isDelete);
+				}
 			}
 			
 		}

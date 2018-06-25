@@ -39,4 +39,8 @@ public interface ProductDao {
 
 	int checkProductName(String product_name);
 
+	int searchProCountOfSc(int sc_id);
+
+	int checkProDelete(int pro_id);
+
 }

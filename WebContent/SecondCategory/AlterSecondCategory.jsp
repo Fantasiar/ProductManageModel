@@ -48,7 +48,13 @@
                 	<tr>
                     <td>
                         <label style="font-size: 18px">
-                            <input name="chk" type="checkbox" value="${sc.sc_id}" style="margin-right: 10px">${sc.sc_name}
+                         <c:if test="${sc.isDelete()==true}">
+                         	<input name="chk" type="checkbox" value="${sc.sc_id}" style="margin-right: 10px">${sc.sc_name}
+                         </c:if>
+                         <c:if test="${sc.isDelete()==false}">
+                             <input name="chk" type="checkbox" disabled="disabled" value="${sc.sc_id}" style="margin-right: 10px">${sc.sc_name}
+                         </c:if>  
+                            
                         </label>
                     </td>
                     <td>
@@ -64,24 +70,33 @@
                 </tbody>
             </table>
         </div>
-        <div class="row">
-                <div class="col-md-1 col-md-offset-2">
-                    <label for="">PREVIOUS</label>
-                </div>
-                <div class="col-md-1">
-                	<c:forEach begin="1" end="${pageCount}" var="p">
+        <div class="row" style="margin-left: 200px">
+            	<ul class="pagination">
+            		<c:if test="${pageNumSc==1}">
+                		<li class="disabled"><a href="#">&laquo;</a></li>
+                	</c:if>
+                	<c:if test="${pageNumSc!=1}">
+                		<li><a href="${pageContext.request.contextPath}/searchSecondCategoryServlet?action=sc&pageNumSc=${pageNumSc-1}">&laquo;</a></li>
+                	</c:if>
+            		
+            		<c:forEach begin="1" end="${pageCount}" var="p">
                 		<c:if test="${p==pageNumSc}">
-                			<label for="">${p}  </label>
+                			<li class="active"><a href="#">${p}</a></li>
                 		</c:if>
                 		<c:if test="${p!=pageNumSc}">
-                			<label for=""><a href="${pageContext.request.contextPath}/searchSecondCategoryServlet?action=sc&pageNumSc=${p}">${p}  </a></label>
+                			<li><a href="${pageContext.request.contextPath}/searchSecondCategoryServlet?action=sc&pageNumSc=${p}">${p} </a></li>
                 		</c:if>
-                	</c:forEach>                    
-                </div>
-                <div class="col-md-1">
-                <label for="">NEXT</label>
-            </div>
-        </div>
+                	</c:forEach> 
+                	
+                	<c:if test="${pageNumSc==pageCount}">
+                		<li class="disabled"><a href="#">&raquo;</a></li>
+                	</c:if>
+                	<c:if test="${pageNumSc!=pageCount}">
+                		<li><a href="${pageContext.request.contextPath}/searchSecondCategoryServlet?action=sc&pageNumSc=${pageNumSc+1}">&raquo;</a></li>
+                	</c:if>
+				</ul>
+        	</div>
+        
     </div>
 </form>
 </body>

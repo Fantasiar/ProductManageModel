@@ -41,21 +41,27 @@ public class EditProductServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		//本servlet用于修改商品信息
+		
+		//设置中文编码
 		request.setCharacterEncoding("utf-8");
+		//根据不同的action执行不同的操作
 		String action = request.getParameter("action");
 		if("edit".equals(action)){
+			//获取要修改的商品对象
 			doEditProduct(request,response);
 		}else if("update".equals(action)){
+			//更新商品信息
 			doUpdateProduct(request,response);
 		}
 		
 	}
-
+	
+	//更新商品信息
 	private void doUpdateProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// TODO Auto-generated method stub
 		int operator_id=110;
-		
+		//获取修改后的商品参数
 		String product_id = request.getParameter("product_id");
 		String product_name = request.getParameter("product_name");
 		String fc_name = request.getParameter("fc_name");
@@ -69,8 +75,8 @@ public class EditProductServlet extends HttpServlet {
 		String publisher = request.getParameter("publisher");
 		String shelf_life = request.getParameter("shelf_life");
 		String remarks = request.getParameter("remarks");
-//		System.out.println(product_name+" "+fc_name+sc_name+" "+measure+" "+original_price+" "+discount
-//				+" "+cost_price+version+" "+supplier_name+" "+publisher+" "+shelf_life+" "+remarks);
+		
+		//封装修改后的商品对象
 		FirstCategory fc = CategoryService.getInstance().getFirstCategoryByName(fc_name);
 		SecondCategory sc = CategoryService.getInstance().getSecondCategoryByName(sc_name);
 		Supplier sup = ProductService.getInstance().getSupplierByName(supplier_name);
@@ -88,7 +94,7 @@ public class EditProductServlet extends HttpServlet {
 		product.setPublisher(publisher);
 		product.setShelf_life(shelf_life);
 		product.setRemarks(remarks);
-		
+		//更新商品对象
 		ProductService.getInstance().updateProduct(product,operator_id);
 		try {
 			request.getRequestDispatcher("/searchProductServlet?product_id="+product_id).forward(request, response);
@@ -98,8 +104,9 @@ public class EditProductServlet extends HttpServlet {
 		};
 	}
 
+	//获取要修改的商品对象
 	private void doEditProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		//根据id查询商品对象
 		String product_id = request.getParameter("product_id");
 		Product product = ProductService.getInstance().searchProductInfo(Integer.parseInt(product_id));
 		int fc_id = product.getFc().getFc_id();
@@ -112,6 +119,7 @@ public class EditProductServlet extends HttpServlet {
 		product.getSc().setSc_name(sc_name);
 		product.getSupplier().setSupplier_name(supplier_name);
 		
+		//获取一级分类选择列表和供应商列表中的默认数据
 		List<FirstCategory> fcList=CategoryService.getInstance().searchAllFc();
 		List<Supplier> supList=CategoryService.getInstance().searchAllSup();
 		request.setAttribute("fcList", fcList);

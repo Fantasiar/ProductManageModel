@@ -5,6 +5,7 @@ public class SecondCategory {
 	private String sc_name;
 	private String sc_info;
 	private FirstCategory fc;
+	private boolean isDelete;
 	
 	public int getSc_id() {
 		return sc_id;
@@ -29,6 +30,12 @@ public class SecondCategory {
 	}
 	public void setFc(FirstCategory fc) {
 		this.fc = fc;
+	}
+	public boolean isDelete() {
+		return isDelete;
+	}
+	public void setDelete(boolean isDelete) {
+		this.isDelete = isDelete;
 	}
 	
 }

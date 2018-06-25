@@ -114,7 +114,7 @@
 					$("#subtn").attr("disabled",false);
 				}else {
 					$("#checkDiscount").css("color","red");
-					$("#checkDiscount").html("折扣不能大于1");
+					$("#checkDiscount").html("商品折扣格式不正确");
 					$("#subtn").attr("disabled",true);
 				}
 				
@@ -128,7 +128,7 @@
 				$("#checkCP").html("成本价不能为空！");
 				$("#subtn").attr("disabled",true);
 			}else {
-				if (cost_price>0 && cost_price<1) {
+				if (cost_price>0 && cost_price<1000000) {
 					$("#checkCP").css("color","green");
 					$("#checkCP").html("成本价格式正确");
 					$("#subtn").attr("disabled",false);

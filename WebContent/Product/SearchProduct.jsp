@@ -55,7 +55,13 @@
                 	<tr>
                     <td>
                         <label style="font-size: 18px">
-                            <input name="chk" type="checkbox" value="${pro.product_id}" style="margin-right: 10px">${pro.product_id}
+                        <c:if test="${pro.isDelete()==true}">
+                         	<input name="chk" type="checkbox" value="${pro.product_id}" style="margin-right: 10px">${pro.product_id}
+                         </c:if>
+                         <c:if test="${pro.isDelete()==false}">
+                             <input name="chk" disabled="disabled" type="checkbox" value="${pro.product_id}" style="margin-right: 10px">${pro.product_id}
+                         </c:if>  
+                            
                         </label>
                     </td>
                     <td>
@@ -74,25 +80,33 @@
                 </tbody>
             </table>
         </div>
-        
-        <div class="row">
-                <div class="col-md-1 col-md-offset-2">
-                    <label for="">PREVIOUS</label>
-                </div>
-                <div class="col-md-1">
-                	<c:forEach begin="1" end="${pageCount}" var="p">
+        <div class="row" style="margin-left: 200px">
+            	<ul class="pagination">
+            		<c:if test="${pageNumPro==1}">
+                		<li class="disabled"><a href="#">&laquo;</a></li>
+                	</c:if>
+                	<c:if test="${pageNumPro!=1}">
+                		<li><a href="${pageContext.request.contextPath}/searchProductServlet?product_id=${product_id}&pageNumPro=${pageNumPro-1}">&laquo;</a></li>
+                	</c:if>
+            		
+            		<c:forEach begin="1" end="${pageCount}" var="p">
                 		<c:if test="${p==pageNumPro}">
-                			<label for="">${p}  </label>
+                			<li class="active"><a href="#">${p}</a></li>
                 		</c:if>
                 		<c:if test="${p!=pageNumPro}">
-                			<label for=""><a href="${pageContext.request.contextPath}/searchProductServlet?product_id=${product_id}&pageNumPro=${p}">${p}  </a></label>
+                			<li><a href="${pageContext.request.contextPath}/searchProductServlet?product_id=${product_id}&pageNumPro=${p}">${p} </a></li>
                 		</c:if>
-                	</c:forEach>                    
-                </div>
-                <div class="col-md-1">
-                <label for="">NEXT</label>
-            </div>
-        </div>
+                	</c:forEach> 
+                	
+                	<c:if test="${pageNumPro==pageCount}">
+                		<li class="disabled"><a href="#">&raquo;</a></li>
+                	</c:if>
+                	<c:if test="${pageNumPro!=pageCount}">
+                		<li><a href="${pageContext.request.contextPath}/searchProductServlet?product_id=${product_id}&pageNumPro=${pageNumPro+1}">&raquo;</a></li>
+                	</c:if>
+				</ul>
+        	</div>
+        
 
     </div>
 </form>

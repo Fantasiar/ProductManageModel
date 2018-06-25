@@ -138,6 +138,22 @@ public class ProductService {
 		int isExist=dao.checkProductName(product_name);
 		return isExist>0?true:false;
 	}
+
+	public boolean searchProCountOfSc(int sc_id) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		ProductDao dao=new ProductDaoImp(conn);
+		int isDelete=dao.searchProCountOfSc(sc_id);
+		return isDelete==0?true:false;
+	}
+
+	public boolean checkProDelete(int pro_id) {
+		// TODO Auto-generated method stub
+		Connection conn=DBUtils.getConn();
+		ProductDao dao=new ProductDaoImp(conn);
+		int isDelete=dao.checkProDelete(pro_id);
+		return isDelete==0?true:false;
+	}
 	
 	
 }

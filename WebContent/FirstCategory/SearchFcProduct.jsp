@@ -61,24 +61,33 @@
             </table>
         </div>
         <input type="hidden" value="${fcId}">
-        <div class="row">
-                <div class="col-md-1 col-md-offset-2">
-                    <label for="">PREVIOUS</label>
-                </div>
-                <div class="col-md-1">
-                	<c:forEach begin="1" end="${pageCount}" var="p">
+        <div class="row" style="margin-left: 200px">
+            	<ul class="pagination">
+            		<c:if test="${pageNumFcPro==1}">
+                		<li class="disabled"><a href="#">&laquo;</a></li>
+                	</c:if>
+                	<c:if test="${pageNumFcPro!=1}">
+                		<li><a href="${pageContext.request.contextPath}/searchFcProductServlet?fcId=${fcId}&pageNumFcPro=${pageNumFcPro-1}">&laquo;</a></li>
+                	</c:if>
+            		
+            		<c:forEach begin="1" end="${pageCount}" var="p">
                 		<c:if test="${p==pageNumFcPro}">
-                			<label for="">${p}  </label>
+                			<li class="active"><a href="#">${p}</a></li>
                 		</c:if>
                 		<c:if test="${p!=pageNumFcPro}">
-                			<label for=""><a href="${pageContext.request.contextPath}/searchFcProductServlet?fcId=${fcId}&pageNumFcPro=${p}">${p}  </a></label>
+                			<li><a href="${pageContext.request.contextPath}/searchFcProductServlet?fcId=${fcId}&pageNumFcPro=${p}">${p} </a></li>
                 		</c:if>
-                	</c:forEach>                    
-                </div>
-                <div class="col-md-1">
-                <label for="">NEXT</label>
-            </div>
-        </div>
+                	</c:forEach> 
+                	
+                	<c:if test="${pageNumFcPro==pageCount}">
+                		<li class="disabled"><a href="#">&raquo;</a></li>
+                	</c:if>
+                	<c:if test="${pageNumFcPro!=pageCount}">
+                		<li><a href="${pageContext.request.contextPath}/searchFcProductServlet?fcId=${fcId}&pageNumFcPro=${pageNumFcPro+1}">&raquo;</a></li>
+                	</c:if>
+				</ul>
+        	</div>
+        
     </div>
 </form>
 </body>

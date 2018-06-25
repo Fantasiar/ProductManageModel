@@ -35,16 +35,17 @@ public class AddFirstCategoryServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		//本servlet用于添加新的一级分类
 		//设置中文编码
 		request.setCharacterEncoding("utf-8");
-	//	System.out.println(fc_name+" "+fc_info);
-		
+		//根据获得的参数封装一级分类对象
 		FirstCategory fc=new FirstCategory();
 		fc.setFc_name(request.getParameter("fc_name"));
 		fc.setFc_info(request.getParameter("fc_info"));
 		int operator_id=110;
+		//将封装好的一级分类对象存入数据库
 		CategoryService.getInstance().addFirstCategory(fc,operator_id);
+		//刷新页面
 		response.sendRedirect(request.getContextPath()+"/FirstCategory/AddFirstCategory.jsp");
 	}
 

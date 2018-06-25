@@ -444,5 +444,43 @@ public class ProductDaoImp implements ProductDao{
 		}
 		return count;
 	}
+
+	@Override
+	public int searchProCountOfSc(int sc_id) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps=null;
+		int count=0;
+//		System.out.println(sc_name);
+		try {
+			ps=conn.prepareStatement("select count(*) c from product where status=1 and sc_id="+sc_id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				count=rs.getInt("c");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
+
+	@Override
+	public int checkProDelete(int pro_id) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps=null;
+		int count=0;
+//		System.out.println(sc_name);
+		try {
+			ps=conn.prepareStatement("select count(*) c from orderinfo where status in (1,2,3,4,5,6,7) and product_id="+pro_id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				count=rs.getInt("c");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
 	
 }

@@ -14,6 +14,8 @@ public class Product {
 	private String publisher;
 	private String shelf_life;
 	private String remarks;
+	private boolean isDelete;
+	
 	public int getProduct_id() {
 		return product_id;
 	}
@@ -91,6 +93,12 @@ public class Product {
 	}
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
+	}
+	public boolean isDelete() {
+		return isDelete;
+	}
+	public void setDelete(boolean isDelete) {
+		this.isDelete = isDelete;
 	}
 	
 	

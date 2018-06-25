@@ -4,6 +4,7 @@ public class FirstCategory {
 	private int fc_id;
 	private String fc_name;
 	private String fc_info;
+	private boolean isDelete;
 	
 	public int getFc_id() {
 		return fc_id;
@@ -22,6 +23,12 @@ public class FirstCategory {
 	}
 	public void setFc_info(String fc_info) {
 		this.fc_info = fc_info;
+	}
+	public boolean isDelete() {
+		return isDelete;
+	}
+	public void setDelete(boolean isDelete) {
+		this.isDelete = isDelete;
 	}
 	
 	

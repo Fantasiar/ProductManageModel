@@ -90,24 +90,33 @@
                 </tbody>
             </table>
         </div>
-        <div class="row">
-                <div class="col-md-1 col-md-offset-2">
-                    <label for="">PREVIOUS</label>
-                </div>
-                <div class="col-md-1">
-                	<c:forEach begin="1" end="${pageCount}" var="p">
+        <div class="row" style="margin-left: 200px">
+            	<ul class="pagination">
+            		<c:if test="${pageNumScPro==1}">
+                		<li class="disabled"><a href="#">&laquo;</a></li>
+                	</c:if>
+                	<c:if test="${pageNumScPro!=1}">
+                		<li><a href="${pageContext.request.contextPath}/searchScProductServlet?scId=${scId}&pageNumScPro=${pageNumScPro-1}">&laquo;</a></li>
+                	</c:if>
+            		
+            		<c:forEach begin="1" end="${pageCount}" var="p">
                 		<c:if test="${p==pageNumScPro}">
-                			<label for="">${p}  </label>
+                			<li class="active"><a href="#">${p}</a></li>
                 		</c:if>
                 		<c:if test="${p!=pageNumScPro}">
-                			<label for=""><a href="${pageContext.request.contextPath}/searchScProductServlet?scId=${scId}&pageNumScPro=${p}">${p}  </a></label>
+                			<li><a href="${pageContext.request.contextPath}/searchScProductServlet?scId=${scId}&pageNumScPro=${p}">${p} </a></li>
                 		</c:if>
-                	</c:forEach>                    
-                </div>
-                <div class="col-md-1">
-                <label for="">NEXT</label>
-            </div>
-        </div>
+                	</c:forEach> 
+                	
+                	<c:if test="${pageNumScPro==pageCount}">
+                		<li class="disabled"><a href="#">&raquo;</a></li>
+                	</c:if>
+                	<c:if test="${pageNumScPro!=pageCount}">
+                		<li><a href="${pageContext.request.contextPath}/searchScProductServlet?scId=${scId}&pageNumScPro=${pageNumScPro+1}">&raquo;</a></li>
+                	</c:if>
+				</ul>
+        	</div>
+        
     </div>
 </form>
 </body>

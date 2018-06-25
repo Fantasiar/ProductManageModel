@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.neuedu.model.po.FirstCategory;
 import com.neuedu.model.po.SecondCategory;
 import com.neuedu.model.service.CategoryService;
+import com.neuedu.model.service.ProductService;
 
 /**
  * Servlet implementation class SearchSecondCategoryServlet
@@ -50,6 +51,11 @@ public class SearchSecondCategoryServlet extends HttpServlet {
 			
 			List<SecondCategory> scList=CategoryService.getInstance().searchPageSc(pageNum);
 			int pageCount=CategoryService.getInstance().searchScPageCount();
+			for (SecondCategory sc : scList) {
+				int sc_id = sc.getSc_id();
+				boolean isDelete=ProductService.getInstance().searchProCountOfSc(sc_id);
+				sc.setDelete(isDelete);
+			}
 			
 			request.setAttribute("scList", scList);
 			request.setAttribute("pageCount", pageCount);

@@ -185,11 +185,11 @@ public class CategoryService {
 		return isExist>0?true:false;
 	}
 
-	public boolean getCountOfScInFc(int[] ids) {
+	public boolean getCountOfScInFc(int fc_id) {
 		// TODO Auto-generated method stub
 		Connection conn=DBUtils.getConn();
 		CategoryDao dao=new CategoryDaoImp(conn);
-		int isDelete=dao.getCountOfScInFc(ids);
+		int isDelete=dao.getCountOfScInFc(fc_id);
 		return isDelete==0?true:false;
 	}
 }
