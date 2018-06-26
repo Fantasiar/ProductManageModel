@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -65,6 +66,15 @@ public class AddProductServlet extends HttpServlet {
 			//通过ajax异步查询一级分类下属的所有二级分类，用于添加商品页面
 		
 			int operator_id=110;
+			
+			//从Cookie中获得当前操作员的id
+			Cookie myCookie[]=request.getCookies();
+			for(int i=0;i<myCookie.length;i++) {
+				Cookie newCookie=myCookie[i];
+				if (newCookie.getName().equals("adminID")) {
+					operator_id=Integer.parseInt(newCookie.getValue());
+				}
+			}
 			
 			//获取商品参数
 			String product_name = request.getParameter("product_name");

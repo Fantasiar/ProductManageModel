@@ -2,6 +2,7 @@ package com.neuedu.controller.secondCategory;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,6 +44,16 @@ public class AddSecondCategoryServlet extends HttpServlet {
 		//设置中文编码
 		request.setCharacterEncoding("utf-8");
 		int operator_id=110;
+		
+		//从Cookie中获得当前操作员的id
+		Cookie myCookie[]=request.getCookies();
+		for(int i=0;i<myCookie.length;i++) {
+			Cookie newCookie=myCookie[i];
+			if (newCookie.getName().equals("adminID")) {
+				operator_id=Integer.parseInt(newCookie.getValue());
+			}
+		}
+		
 		String fc_name = request.getParameter("fc_name");
 		String sc_name = request.getParameter("sc_name");
 		String sc_info = request.getParameter("sc_info");

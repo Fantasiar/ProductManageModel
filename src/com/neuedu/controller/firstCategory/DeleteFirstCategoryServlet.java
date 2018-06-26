@@ -2,6 +2,7 @@ package com.neuedu.controller.firstCategory;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,6 +46,16 @@ public class DeleteFirstCategoryServlet extends HttpServlet {
 		for (int i = 0; i < chks.length; i++) {
 			ids[i]=Integer.parseInt(chks[i]);
 		}
+		
+		//从Cookie中获得当前操作员的id
+		Cookie myCookie[]=request.getCookies();
+		for(int i=0;i<myCookie.length;i++) {
+			Cookie newCookie=myCookie[i];
+			if (newCookie.getName().equals("adminID")) {
+				operator_id=Integer.parseInt(newCookie.getValue());
+			}
+		}
+		
 		//从数据库中删除集合中id对应的一级分类
 		CategoryService.getInstance().deleteFirstCategory(ids,operator_id);
 		//刷新页面，更新数据

@@ -2,6 +2,7 @@ package com.neuedu.controller.product;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,6 +41,16 @@ public class DeleteProductServlet extends HttpServlet {
 		
 		//设置中文编码
 		request.setCharacterEncoding("utf-8");
+		
+		//从Cookie中获得当前操作员的id
+		Cookie myCookie[]=request.getCookies();
+		for(int i=0;i<myCookie.length;i++) {
+			Cookie newCookie=myCookie[i];
+			if (newCookie.getName().equals("adminID")) {
+				operator_id=Integer.parseInt(newCookie.getValue());
+			}
+		}
+		
 		//获取要删除的商品的id集合
 		String[] chks = request.getParameterValues("chk");
 		int[] ids=new int[chks.length];

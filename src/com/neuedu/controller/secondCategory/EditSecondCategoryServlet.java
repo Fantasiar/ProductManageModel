@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -56,6 +57,16 @@ public class EditSecondCategoryServlet extends HttpServlet {
 	//更新二级分类
 	private void doUpdateSecondCategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int operator_id=110;
+		
+		//从Cookie中获得当前操作员的id
+		Cookie myCookie[]=request.getCookies();
+		for(int i=0;i<myCookie.length;i++) {
+			Cookie newCookie=myCookie[i];
+			if (newCookie.getName().equals("adminID")) {
+				operator_id=Integer.parseInt(newCookie.getValue());
+			}
+		}
+		
 		//获取修改后的二级分类参数
 		String sc_id = request.getParameter("sc_id");
 		String sc_name = request.getParameter("sc_name");

@@ -80,7 +80,7 @@ public class ProductDaoImp implements ProductDao{
 		//根据一级分类id分页查询下属商品
 		List<Product> list=new ArrayList<Product>();
 		PreparedStatement ps=null;
-		int pageSize=6;
+		int pageSize=8;
 		StringBuffer sbf=new StringBuffer("");
 		sbf.append("select * from product where status=1 and fc_id="+fc_id);
 		try {
@@ -107,7 +107,7 @@ public class ProductDaoImp implements ProductDao{
 	public int searchFcProPageCount(int fc_id) {
 		//查询一级分类下属商品列表的页数
 		int count=0;
-		int pageSize=6;
+		int pageSize=8;
 		PreparedStatement ps=null;
 		try {
 			ps=conn.prepareStatement("select count(*) c from product where status=1 and fc_id="+fc_id);
@@ -188,7 +188,7 @@ public class ProductDaoImp implements ProductDao{
 		//分页查询二级分类下属商品
 		List<Product> list=new ArrayList<Product>();
 		PreparedStatement ps=null;
-		int pageSize=6;
+		int pageSize=8;
 		StringBuffer sbf=new StringBuffer("");
 		sbf.append("select * from product where status=1 and sc_id="+sc_id);
 		try {
@@ -215,7 +215,7 @@ public class ProductDaoImp implements ProductDao{
 	public int searchScProPageCount(int sc_id) {
 		//查询二级分类下属商品列表的页数
 		int count=0;
-		int pageSize=6;
+		int pageSize=8;
 		PreparedStatement ps=null;
 		try {
 			ps=conn.prepareStatement("select count(*) c from product where status=1 and sc_id="+sc_id);
@@ -241,7 +241,7 @@ public class ProductDaoImp implements ProductDao{
 		//分页查询所有的商品
 		List<Product> list=new ArrayList<Product>();
 		PreparedStatement ps=null;
-		int pageSize=6;
+		int pageSize=8;
 		StringBuffer sbf=new StringBuffer("");
 		sbf.append("select * from product where status=1");
 		try {
@@ -268,7 +268,7 @@ public class ProductDaoImp implements ProductDao{
 	public int findAllPageCount() {
 		//查询所有商品列表的页数
 		int count=0;
-		int pageSize=6;
+		int pageSize=8;
 		PreparedStatement ps=null;
 		try {
 			ps=conn.prepareStatement("select count(*) c from product where status=1");
@@ -294,7 +294,7 @@ public class ProductDaoImp implements ProductDao{
 		//根据商品id查询所有的商品
 		List<Product> list=new ArrayList<Product>();
 		PreparedStatement ps=null;
-		int pageSize=3;
+		int pageSize=8;
 		StringBuffer sbf=new StringBuffer("");
 		sbf.append("select * from product where status=1 and product_id=?");
 		try {

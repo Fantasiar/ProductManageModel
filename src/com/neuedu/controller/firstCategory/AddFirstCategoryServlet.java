@@ -2,6 +2,7 @@ package com.neuedu.controller.firstCategory;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,7 +44,19 @@ public class AddFirstCategoryServlet extends HttpServlet {
 		FirstCategory fc=new FirstCategory();
 		fc.setFc_name(request.getParameter("fc_name"));
 		fc.setFc_info(request.getParameter("fc_info"));
+		
 		int operator_id=110;
+		
+		//从Cookie中获得当前操作员的id
+		Cookie myCookie[]=request.getCookies();
+		for(int i=0;i<myCookie.length;i++) {
+			Cookie newCookie=myCookie[i];
+			if (newCookie.getName().equals("adminID")) {
+				operator_id=Integer.parseInt(newCookie.getValue());
+			}
+		}
+		
+		
 		//将封装好的一级分类对象存入数据库
 		CategoryService.getInstance().addFirstCategory(fc,operator_id);
 		//刷新页面

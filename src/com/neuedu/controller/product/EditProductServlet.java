@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -59,7 +60,7 @@ public class EditProductServlet extends HttpServlet {
 	
 	//更新商品信息
 	private void doUpdateProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		// TODO Auto-generated method stub
+		
 		int operator_id=110;
 		//获取修改后的商品参数
 		String product_id = request.getParameter("product_id");
@@ -75,6 +76,15 @@ public class EditProductServlet extends HttpServlet {
 		String publisher = request.getParameter("publisher");
 		String shelf_life = request.getParameter("shelf_life");
 		String remarks = request.getParameter("remarks");
+		
+		//从Cookie中获得当前操作员的id
+		Cookie myCookie[]=request.getCookies();
+		for(int i=0;i<myCookie.length;i++) {
+			Cookie newCookie=myCookie[i];
+			if (newCookie.getName().equals("adminID")) {
+				operator_id=Integer.parseInt(newCookie.getValue());
+			}
+		}
 		
 		//封装修改后的商品对象
 		FirstCategory fc = CategoryService.getInstance().getFirstCategoryByName(fc_name);

@@ -2,6 +2,7 @@ package com.neuedu.controller.firstCategory;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -63,6 +64,16 @@ public class EditFirstCategoryServlet extends HttpServlet {
 		fc.setFc_id(Integer.parseInt(fc_id));
 		fc.setFc_name(fc_name);
 		fc.setFc_info(fc_info);
+		
+		//从Cookie中获得当前操作员的id
+		Cookie myCookie[]=request.getCookies();
+		for(int i=0;i<myCookie.length;i++) {
+			Cookie newCookie=myCookie[i];
+			if (newCookie.getName().equals("adminID")) {
+				operator_id=Integer.parseInt(newCookie.getValue());
+			}
+		}
+		
 		//更新一级分类对象
 		CategoryService.getInstance().updateFirstCategory(fc,operator_id);
 		response.sendRedirect(request.getContextPath()+"/searchFirstCategoryServlet?action=fc&pageNumFc="+pageNum);
