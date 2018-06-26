@@ -41,16 +41,17 @@ public class SearchFirstCategoryServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//本servlet用于获取一级分类列表
+		
 		//设置中文编码
 		request.setCharacterEncoding("utf-8");
 		String action = request.getParameter("action");
 		if ("fc".equals(action)) {
 			//用于一级类名分页
 			
-			//获取当前页数
+			//获取当前页码
 			String currentPageNumber = request.getParameter("pageNumFc");
 			int pageNum=1;
-			//如果当前页数不为1，修改pageNum为当前页数
+			//如果当前页码不为空，修改pageNum为当前页数
 			if (currentPageNumber != null && !"".equals(currentPageNumber)) {
 				pageNum=Integer.parseInt(currentPageNumber);
 			}

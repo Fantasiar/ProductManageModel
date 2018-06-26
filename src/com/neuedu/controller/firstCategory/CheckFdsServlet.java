@@ -56,7 +56,6 @@ public class CheckFdsServlet extends HttpServlet {
 			//校验商品名是否存在
 			String product_name = request.getParameter("product_name");
 			boolean isExist=ProductService.getInstance().checkProductName(product_name);
-			System.out.println(isExist);
 			response.getWriter().write("{\"isExist\":"+isExist+"}");
 		}
 	}

@@ -36,9 +36,10 @@ public class AddFirstCategoryServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//本servlet用于添加新的一级分类
+		
 		//设置中文编码
 		request.setCharacterEncoding("utf-8");
-		//根据获得的参数封装一级分类对象
+		//根据获得的属性参数封装一级分类对象
 		FirstCategory fc=new FirstCategory();
 		fc.setFc_name(request.getParameter("fc_name"));
 		fc.setFc_info(request.getParameter("fc_info"));

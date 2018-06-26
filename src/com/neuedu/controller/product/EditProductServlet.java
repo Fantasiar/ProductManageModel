@@ -124,7 +124,7 @@ public class EditProductServlet extends HttpServlet {
 		List<Supplier> supList=CategoryService.getInstance().searchAllSup();
 		request.setAttribute("fcList", fcList);
 		request.setAttribute("supList", supList);
-		
+		//将要修改的商品信息请求转发到修改商品的界面
 		request.setAttribute("product", product);
 		request.getRequestDispatcher("/Product/EditProduct.jsp").forward(request, response);
 	}

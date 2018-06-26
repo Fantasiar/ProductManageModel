@@ -24,7 +24,7 @@ public class ProductDaoImp implements ProductDao{
 
 	@Override
 	public Supplier getSupplierByName(String supplier_name) {
-		// TODO Auto-generated method stub
+		//根据供应商名称获取供应商对象
 		Supplier sup=new Supplier();
 		PreparedStatement ps=null;
 		try {
@@ -44,7 +44,7 @@ public class ProductDaoImp implements ProductDao{
 
 	@Override
 	public void addProduct(Product product, int operator_id) {
-		// TODO Auto-generated method stub
+		//添加新商品
 		PreparedStatement ps=null;
 		int status=1;
 		Date operator_date=new Date();
@@ -77,7 +77,7 @@ public class ProductDaoImp implements ProductDao{
 
 	@Override
 	public List<Product> searchProductByFc(int fc_id, int pageNum) {
-		// TODO Auto-generated method stub
+		//根据一级分类id分页查询下属商品
 		List<Product> list=new ArrayList<Product>();
 		PreparedStatement ps=null;
 		int pageSize=6;
@@ -105,7 +105,7 @@ public class ProductDaoImp implements ProductDao{
 
 	@Override
 	public int searchFcProPageCount(int fc_id) {
-		// TODO Auto-generated method stub
+		//查询一级分类下属商品列表的页数
 		int count=0;
 		int pageSize=6;
 		PreparedStatement ps=null;
@@ -130,21 +130,13 @@ public class ProductDaoImp implements ProductDao{
 
 	@Override
 	public Product searchProductInfo(int product_id) {
-		// TODO Auto-generated method stub
+		//根据商品id查询商品详细信息
 		Product product=new Product();
 		FirstCategory fc=new FirstCategory();
 		SecondCategory sc=new SecondCategory();
 		Supplier sup=new Supplier();
 		PreparedStatement ps=null;
 		try {
-//			ps=conn.prepareStatement("select p.product_name,p.fc_id,p.sc_id,"
-//					+ "f.fc_name,s.sc_name, "
-//					+ "p.measure,p.original_price,p.discount,p.cost_price, "
-//					+ "p.version,sup.supplier_id,p.publisher,p.shelf_life, "
-//					+ "p.remarks from product p,firstcategory f,secondcategory s, "
-//					+ "supplier sup where p.supplier_id=sup.supplier_id and "
-//					+ "p.fc_id=f.fc_id and f.fc_id=s.fc_id and p.sc_id=s.sc_id and "
-//					+ "p.product_id="+product_id);
 			ps=conn.prepareStatement("select * from product where product_id="+product_id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
@@ -175,7 +167,7 @@ public class ProductDaoImp implements ProductDao{
 
 	@Override
 	public String searchSupNameById(int supplier_id) {
-		// TODO Auto-generated method stub
+		//根据供应商id查询供应商名称
 		PreparedStatement ps=null;
 		String supplier_name="";
 		try {
@@ -193,7 +185,7 @@ public class ProductDaoImp implements ProductDao{
 
 	@Override
 	public List<Product> searchProductBySc(int sc_id, int pageNum) {
-		// TODO Auto-generated method stub
+		//分页查询二级分类下属商品
 		List<Product> list=new ArrayList<Product>();
 		PreparedStatement ps=null;
 		int pageSize=6;
@@ -221,7 +213,7 @@ public class ProductDaoImp implements ProductDao{
 
 	@Override
 	public int searchScProPageCount(int sc_id) {
-		// TODO Auto-generated method stub
+		//查询二级分类下属商品列表的页数
 		int count=0;
 		int pageSize=6;
 		PreparedStatement ps=null;
@@ -246,7 +238,7 @@ public class ProductDaoImp implements ProductDao{
 
 	@Override
 	public List<Product> findAllPageProduct(int pageNum) {
-		// TODO Auto-generated method stub
+		//分页查询所有的商品
 		List<Product> list=new ArrayList<Product>();
 		PreparedStatement ps=null;
 		int pageSize=6;
@@ -274,7 +266,7 @@ public class ProductDaoImp implements ProductDao{
 
 	@Override
 	public int findAllPageCount() {
-		// TODO Auto-generated method stub
+		//查询所有商品列表的页数
 		int count=0;
 		int pageSize=6;
 		PreparedStatement ps=null;
@@ -299,7 +291,7 @@ public class ProductDaoImp implements ProductDao{
 
 	@Override
 	public List<Product> findProductByName(int product_id, int pageNum) {
-		// TODO Auto-generated method stub
+		//根据商品id查询所有的商品
 		List<Product> list=new ArrayList<Product>();
 		PreparedStatement ps=null;
 		int pageSize=3;
@@ -328,7 +320,7 @@ public class ProductDaoImp implements ProductDao{
 
 	@Override
 	public int findProductPageCount(int product_id) {
-		// TODO Auto-generated method stub
+		//查询根据商品id获取的商品列表的页数
 		int count=0;
 		int pageSize=3;
 		PreparedStatement ps=null;
@@ -354,13 +346,10 @@ public class ProductDaoImp implements ProductDao{
 
 	@Override
 	public void updateProduct(Product product, int operator_id) {
-		// TODO Auto-generated method stub
+		//修改商品信息
 		PreparedStatement ps=null;
 		Date operator_date = new Date();
 		try {
-//			System.out.println(product.getProduct_name()+" "+product.getFc().getFc_id()+" "+product.getMeasure()+" "+product.getOriginal_price()+
-//					" "+product.getDiscount()+" "+product.getCost_price()+" "+product.getVersion()+
-//					" "+product.getSupplier().getSupplier_id()+" "+product.getPublisher()+" "+product.getShelf_life()+" "+product.getRemarks()+" "+product.getProduct_id()+" "+operator_id+" "+operator_date.getTime());
 			ps=conn.prepareStatement("update product set product_name=? , fc_id=? , sc_id=? , measure=? , original_price=? , discount=? , cost_price=? , version=? , supplier_id=? , publisher=? , shelf_life=? , remarks=? , operator_id=? , operator_date=? where product_id=? ");
 			ps.setString(1, product.getProduct_name());
 			ps.setInt(2, product.getFc().getFc_id());
@@ -388,7 +377,7 @@ public class ProductDaoImp implements ProductDao{
 
 	@Override
 	public void deleteProduct(int[] ids, int operator_id) {
-		// TODO Auto-generated method stub
+		//删除商品
 		String id=Arrays.toString(ids).replace('[','(').replace(']',')');
 		PreparedStatement ps=null;
 		Date operator_date = new Date();
@@ -408,7 +397,7 @@ public class ProductDaoImp implements ProductDao{
 
 	@Override
 	public int searchProductIdByName(String product_name) {
-		// TODO Auto-generated method stub
+		//根据商品名称查询商品id
 		int product_id=0;
 		PreparedStatement ps=null;
 		try {
@@ -427,10 +416,9 @@ public class ProductDaoImp implements ProductDao{
 
 	@Override
 	public int checkProductName(String product_name) {
-		// TODO Auto-generated method stub
+		//校验商品名称是否重复
 		PreparedStatement ps=null;
 		int count=0;
-//		System.out.println(sc_name);
 		try {
 			ps=conn.prepareStatement("select count(*) c from product where product_name=?");
 			ps.setString(1, product_name);
@@ -447,10 +435,9 @@ public class ProductDaoImp implements ProductDao{
 
 	@Override
 	public int searchProCountOfSc(int sc_id) {
-		// TODO Auto-generated method stub
+		//校验二级分类是否可以删除
 		PreparedStatement ps=null;
 		int count=0;
-//		System.out.println(sc_name);
 		try {
 			ps=conn.prepareStatement("select count(*) c from product where status=1 and sc_id="+sc_id);
 			ResultSet rs = ps.executeQuery();
@@ -466,10 +453,9 @@ public class ProductDaoImp implements ProductDao{
 
 	@Override
 	public int checkProDelete(int pro_id) {
-		// TODO Auto-generated method stub
+		//校验商品是否可以被删除
 		PreparedStatement ps=null;
 		int count=0;
-//		System.out.println(sc_name);
 		try {
 			ps=conn.prepareStatement("select count(*) c from orderinfo where status in (1,2,3,4,5,6,7) and product_id="+pro_id);
 			ResultSet rs = ps.executeQuery();

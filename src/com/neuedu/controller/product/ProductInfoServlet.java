@@ -39,8 +39,12 @@ public class ProductInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		//本sevlet用于查看选定商品的详细信息
+		
+		//设置中文编码
 		request.setCharacterEncoding("utf-8");
+		
+		//根据商品id去数据库查询商品对象并进行封装
 		String product_id = request.getParameter("product_id");
 		Product product = ProductService.getInstance().searchProductInfo(Integer.parseInt(product_id));
 		int fc_id = product.getFc().getFc_id();
@@ -52,6 +56,7 @@ public class ProductInfoServlet extends HttpServlet {
 		product.getFc().setFc_name(fc_name);
 		product.getSc().setSc_name(sc_name);
 		product.getSupplier().setSupplier_name(supplier_name);
+		//将封转好的商品对象转发给查看商品详情界面
 		request.setAttribute("product", product);
 		request.getRequestDispatcher("/Product/ProductInfo.jsp").forward(request, response);
 	}

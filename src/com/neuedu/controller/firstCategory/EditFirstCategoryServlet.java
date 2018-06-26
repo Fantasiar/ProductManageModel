@@ -36,6 +36,7 @@ public class EditFirstCategoryServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//本servlet用于修改一级分类
+		
 		//设置中文编码
 		request.setCharacterEncoding("utf-8");
 		//根据不同的action执行不同的操作

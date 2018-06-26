@@ -35,6 +35,7 @@ public class DeleteFirstCategoryServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//本servlet用于删除一级分类
+		
 		int operator_id=111;
 		//设置中文编码
 		request.setCharacterEncoding("utf-8");

@@ -27,7 +27,7 @@ public class CategoryDaoImp implements CategoryDao{
 
 	@Override
 	public void addFirstCategory(FirstCategory fc, int operator_id) {
-		// TODO Auto-generated method stub
+		//添加一级分类
 		PreparedStatement ps=null;
 		int status=1;
 		Date operator_date=new Date();
@@ -50,7 +50,7 @@ public class CategoryDaoImp implements CategoryDao{
 
 	@Override
 	public List<FirstCategory> searchPageFc(int pageNum) {
-		// TODO Auto-generated method stub
+		//分页查询一级分类列表
 		List<FirstCategory> list=new ArrayList<FirstCategory>();
 		PreparedStatement ps=null;
 		int pageSize=8;
@@ -79,7 +79,7 @@ public class CategoryDaoImp implements CategoryDao{
 
 	@Override
 	public int searchFcPageCount() {
-		// TODO Auto-generated method stub
+		//查询一级分类页数
 		int count=0;
 		int pageSize=8;
 		PreparedStatement ps=null;
@@ -104,7 +104,7 @@ public class CategoryDaoImp implements CategoryDao{
 
 	@Override
 	public FirstCategory getFirstCategoryById(int fc_id) {
-		// TODO Auto-generated method stub
+		//通过一级分类id查询一级分类
 		FirstCategory fc=new FirstCategory();
 		PreparedStatement ps=null;
 		try {
@@ -124,7 +124,7 @@ public class CategoryDaoImp implements CategoryDao{
 
 	@Override
 	public void updateFirstCategory(FirstCategory fc, int operator_id) {
-		// TODO Auto-generated method stub
+		//修改一级分类
 		PreparedStatement ps=null;
 		Date operator_date = new Date();
 		try {
@@ -147,7 +147,7 @@ public class CategoryDaoImp implements CategoryDao{
 
 	@Override
 	public void deleteFirstCategory(int[] ids, int operator_id) {
-		// TODO Auto-generated method stub
+		//删除一级分类
 		String id=Arrays.toString(ids).replace('[','(').replace(']',')');
 		PreparedStatement ps=null;
 		Date operator_date = new Date();
@@ -167,7 +167,7 @@ public class CategoryDaoImp implements CategoryDao{
 
 	@Override
 	public List<FirstCategory> searchAllFc() {
-		// TODO Auto-generated method stub
+		//查询所有一级分类（不分页）
 		List<FirstCategory> list=new ArrayList<FirstCategory>();
 		PreparedStatement ps=null;
 		try {
@@ -188,7 +188,7 @@ public class CategoryDaoImp implements CategoryDao{
 
 	@Override
 	public FirstCategory getFirstCategoryByName(String fc_name) {
-		// TODO Auto-generated method stub
+		//根据一级分类名称查询一级分类对象
 		FirstCategory fc=new FirstCategory();
 		PreparedStatement ps=null;
 		try {
@@ -209,7 +209,7 @@ public class CategoryDaoImp implements CategoryDao{
 
 	@Override
 	public void addSecondCategory(SecondCategory sc, int operator_id) {
-		// TODO Auto-generated method stub
+		//添加二级分类
 		PreparedStatement ps=null;
 		int status=1;
 		Date operator_date=new Date();
@@ -232,7 +232,7 @@ public class CategoryDaoImp implements CategoryDao{
 
 	@Override
 	public List<SecondCategory> searchPageSc(int pageNum) {
-		// TODO Auto-generated method stub
+		//分页查询二级分类
 		List<SecondCategory> list=new ArrayList<SecondCategory>();
 		PreparedStatement ps=null;
 		int pageSize=8;
@@ -264,7 +264,7 @@ public class CategoryDaoImp implements CategoryDao{
 
 	@Override
 	public int searchScPageCount() {
-		// TODO Auto-generated method stub
+		//查询二级分类列表页数
 		int count=0;
 		int pageSize=8;
 		PreparedStatement ps=null;
@@ -289,7 +289,7 @@ public class CategoryDaoImp implements CategoryDao{
 
 	@Override
 	public SecondCategory getSecondCategoryById(int sc_id) {
-		// TODO Auto-generated method stub
+		//通过id查询二级分类
 		SecondCategory sc=new SecondCategory();
 		PreparedStatement ps=null;
 		try {
@@ -314,7 +314,7 @@ public class CategoryDaoImp implements CategoryDao{
 
 	@Override
 	public void updateSecondCategory(SecondCategory sc, int operator_id) {
-		// TODO Auto-generated method stub
+		//修改二级分类
 		PreparedStatement ps=null;
 		Date operator_date = new Date();
 		try {
@@ -337,7 +337,7 @@ public class CategoryDaoImp implements CategoryDao{
 
 	@Override
 	public void deleteSecondCategory(int[] ids, int operator_id) {
-		// TODO Auto-generated method stub
+		//删除二级分类
 		String id=Arrays.toString(ids).replace('[','(').replace(']',')');
 		PreparedStatement ps=null;
 		Date operator_date = new Date();
@@ -357,7 +357,7 @@ public class CategoryDaoImp implements CategoryDao{
 
 	@Override
 	public List<SecondCategory> searchScByFcId(int fc_id) {
-		// TODO Auto-generated method stub
+		//通过一级分类id查询下属的二级分类
 		List<SecondCategory> list=new ArrayList<SecondCategory>();
 		PreparedStatement ps=null;
 		try {
@@ -378,7 +378,7 @@ public class CategoryDaoImp implements CategoryDao{
 
 	@Override
 	public List<Supplier> searchAllSup() {
-		// TODO Auto-generated method stub
+		//查询所有的供应商
 		List<Supplier> list=new ArrayList<Supplier>();
 		PreparedStatement ps=null;
 		try {
@@ -399,7 +399,7 @@ public class CategoryDaoImp implements CategoryDao{
 
 	@Override
 	public SecondCategory getSecondCategoryByName(String sc_name) {
-		// TODO Auto-generated method stub
+		//通过二级分类名称获取二级分类对象
 		SecondCategory sc=new SecondCategory();
 		PreparedStatement ps=null;
 		try {
@@ -423,7 +423,7 @@ public class CategoryDaoImp implements CategoryDao{
 
 	@Override
 	public String searchFcNameById(int fc_id) {
-		// TODO Auto-generated method stub
+		//通过一级分类id查询一级分类的名称
 		PreparedStatement ps=null;
 		String fc_name="";
 		try {
@@ -441,7 +441,7 @@ public class CategoryDaoImp implements CategoryDao{
 
 	@Override
 	public String searchScNameById(int sc_id) {
-		// TODO Auto-generated method stub
+		//通过二级分类id查询二级分类名
 		PreparedStatement ps=null;
 		String sc_name="";
 		try {
@@ -459,7 +459,7 @@ public class CategoryDaoImp implements CategoryDao{
 
 	@Override
 	public int checkFcName(String fc_name) {
-		// TODO Auto-generated method stub
+		//校验一级分类名
 		PreparedStatement ps=null;
 		int count=0;
 		try {
@@ -478,10 +478,9 @@ public class CategoryDaoImp implements CategoryDao{
 
 	@Override
 	public int checkScName(String sc_name) {
-		// TODO Auto-generated method stub
+		//校验二级分类名
 		PreparedStatement ps=null;
 		int count=0;
-//		System.out.println(sc_name);
 		try {
 			ps=conn.prepareStatement("select count(*) c from secondcategory where sc_name=?");
 			ps.setString(1, sc_name);
@@ -498,10 +497,9 @@ public class CategoryDaoImp implements CategoryDao{
 
 	@Override
 	public int getCountOfScInFc(int fc_id) {
-		// TODO Auto-generated method stub
+		//校验一级分类是否可以被删除
 		PreparedStatement ps=null;
 		int count=0;
-//		System.out.println(sc_name);
 		try {
 			ps=conn.prepareStatement("select count(*) c from secondcategory where status=1 and fc_id="+fc_id);
 			ResultSet rs = ps.executeQuery();

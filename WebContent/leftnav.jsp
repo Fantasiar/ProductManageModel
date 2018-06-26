@@ -1,15 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>修改/删除一级分类</title>
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<style>
+<script>
+        $(function(){
+            $(".panel-heading").click(function(e){
+                /*切换折叠指示图标*/
+                $(this).find("span").toggleClass("glyphicon-chevron-down");
+                $(this).find("span").toggleClass("glyphicon-chevron-up");
+            });
+        });
+        </script>
+        
+        <style>
             .panel-group{max-height:770px;overflow: auto;}
             .leftMenu{margin:10px;margin-top:5px;}
             .leftMenu .panel-heading{font-size:14px;padding-left:20px;height:36px;line-height:36px;color:white;position:relative;cursor:pointer;}/*转成手形图标*/
@@ -17,34 +26,6 @@
             .leftMenu .menu-item-left{padding: 2px; background: transparent; border:1px solid transparent;border-radius: 6px;}
             .leftMenu .menu-item-left:hover{background:#C4E3F3;border:1px solid #1E90FF;}
         </style>
-	<script type="text/javascript">
-	$(function(){
-        $(".panel-heading").click(function(e){
-            /*切换折叠指示图标*/
-            $(this).find("span").toggleClass("glyphicon-chevron-down");
-            $(this).find("span").toggleClass("glyphicon-chevron-up");
-        });
-    });
-	
-	function deleteFirstCategory(){
-		var chks=document.getElementsByName("chk");
-		var flag=false;
-		for(var i=0;i<chks.length;i++){
-			if(chks[i].checked==true){
-				flag=true;
-				break;
-			}
-		}
-		if(flag){
-			//提交请求
-			document.forms[0].action="${pageContext.request.contextPath}/deleteFirstCategoryServlet";
-			document.forms[0].submit();
-		}else{
-			//提示
-			alert("请至少选择一个用户进行删除");
-		}
-	}
-	</script>
 </head>
 <body>
 	<div class="row">
@@ -63,7 +44,7 @@
                             <ul class="list-group">
                               <li class="list-group-item">
                                 <button class="menu-item-left" >
-                                	 <a href="${pageContext.request.contextPath}/FirstCategory/AddFirstCategory.jsp">
+                                	 <a href="${pageContext.request.contextPath}/FirstCategory/AddFirstCategory.jsp" target="kfc">
                                 		<span class="glyphicon glyphicon-triangle-right">添加一级分类</span>
                                 	 </a>
                                 </button>
@@ -93,7 +74,7 @@
                                 <span class="glyphicon glyphicon-chevron-down right"></span>
                             </h4>
                         </div>
-                        <div id="collapseListGroup2" class="panel-collapse collapse " role="tabpanel" aria-labelledby="collapseListGroupHeading2">
+                        <div id="collapseListGroup2" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupHeading2">
                             <ul class="list-group">
                               <li class="list-group-item">
                                 <button class="menu-item-left" >
@@ -127,7 +108,7 @@
                                 <span class="glyphicon glyphicon-chevron-down right"></span>
                             </h4>
                         </div>
-                        <div id="collapseListGroup3" class="panel-collapse collapse " role="tabpanel" aria-labelledby="collapseListGroupHeading3">
+                        <div id="collapseListGroup3" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupHeading3">
                             <ul class="list-group">
                               <li class="list-group-item">
                                 <button class="menu-item-left" >
@@ -154,7 +135,7 @@
                                 <span class="glyphicon glyphicon-chevron-down right"></span>
                             </h4>
                         </div>
-                        <div id="collapseListGroup4" class="panel-collapse collapse " role="tabpanel" aria-labelledby="collapseListGroupHeading4">
+                        <div id="collapseListGroup4" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupHeading4">
                             <ul class="list-group">
                               <li class="list-group-item">
                                 <button class="menu-item-left">
@@ -183,7 +164,7 @@
                                 <span class="glyphicon glyphicon-chevron-down right"></span>
                             </h4>
                         </div>
-                        <div id="collapseListGroup5" class="panel-collapse collapse " role="tabpanel" aria-labelledby="collapseListGroupHeading5">
+                        <div id="collapseListGroup5" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupHeading5">
                             <ul class="list-group">
                               <li class="list-group-item">
                                 <button class="menu-item-left">
@@ -206,7 +187,7 @@
                                 <span class="glyphicon glyphicon-chevron-down right"></span>
                             </h4>
                         </div>
-                        <div id="collapseListGroup6" class="panel-collapse collapse " role="tabpanel" aria-labelledby="collapseListGroupHeading6">
+                        <div id="collapseListGroup6" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupHeading6">
                             <ul class="list-group">
                               <li class="list-group-item">
                                 <button class="menu-item-left">
@@ -229,7 +210,7 @@
                                 <span class="glyphicon glyphicon-chevron-down right"></span>
                             </h4>
                         </div>
-                        <div id="collapseListGroup7" class="panel-collapse collapse " role="tabpanel" aria-labelledby="collapseListGroupHeading7">
+                        <div id="collapseListGroup7" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupHeading7">
                             <ul class="list-group">
                               <li class="list-group-item">
                                 <button class="menu-item-left">
@@ -252,7 +233,7 @@
                                 <span class="glyphicon glyphicon-chevron-down right"></span>
                             </h4>
                         </div>
-                        <div id="collapseListGroup8" class="panel-collapse collapse " role="tabpanel" aria-labelledby="collapseListGroupHeading8">
+                        <div id="collapseListGroup8" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupHeading8">
                             <ul class="list-group">
                               <li class="list-group-item">
                                 <button class="menu-item-left">
@@ -270,7 +251,7 @@
                                 <span class="glyphicon glyphicon-chevron-down right"></span>
                             </h4>
                         </div>
-                        <div id="collapseListGroup9" class="panel-collapse collapse " role="tabpanel" aria-labelledby="collapseListGroupHeading9">
+                        <div id="collapseListGroup9" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupHeading9">
                             <ul class="list-group">
                               <li class="list-group-item">
                                 <button class="menu-item-left">
@@ -294,77 +275,15 @@
                 </div>
             </div>
           
-          <form action="" method="post">
-        <div class="col-md-8">
-            <div class="row" style="margin-top: 20px;margin-left: 20px;width: 800px;margin-top: 20px">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th style="font-size: 25px;">一级分类名</th>
-                        <th><button onclick="deleteFirstCategory()" class="btn btn-danger" style="float: right;margin-right: 50px;background: #EE0000;border: 1px solid #EE0000;width: 80px">删除</button></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${fcList}" var="fc">
-                    	<tr>
-                        <td>
-                            <label style="font-size: 18px">
-                            <c:if test="${fc.isDelete()==true}">
-                            	<input type="checkbox" id="chk" name="chk" value="${fc.fc_id}" style="margin-right: 10px">${fc.fc_name}
-                            </c:if>
-                             <c:if test="${fc.isDelete()==false}">
-                            	<input type="checkbox" disabled="disabled" id="chk" name="chk" value="${fc.fc_id}" style="margin-right: 10px">${fc.fc_name}
-                            </c:if>  
-                            </label>
-                        </td>
-                        <td>
-                        	
-                        	<a href="${pageContext.request.contextPath}/editFirstCategoryServlet?fc_id=${fc.fc_id}&action=edit">
-                        		<input type="button" class="btn btn-warning"  value="修改" style="background: #FFB90F;border:1px solid #FFB90F;float: right;margin-right: 65px">
-                        	</a>
-                        	<!-- <button onclick="" class="btn btn-default" style="float: right;margin-right: 50px">修改</button> -->
-                        	
-                        </td>
-                    </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </div>
-            <div class="row" style="margin-left: 200px">
-            	<ul class="pagination">
-            		<c:if test="${pageNumFc==1}">
-                		<li class="disabled"><a href="#">&laquo;</a></li>
-                	</c:if>
-                	<c:if test="${pageNumFc!=1}">
-                		<li><a href="${pageContext.request.contextPath}/searchFirstCategoryServlet?action=fc&pageNumFc=${pageNumFc-1}">&laquo;</a></li>
-                	</c:if>
-            		
-            		<c:forEach begin="1" end="${pageCount}" var="p">
-                		<c:if test="${p==pageNumFc}">
-                			<li class="active"><a href="#">${p}</a></li>
-                		</c:if>
-                		<c:if test="${p!=pageNumFc}">
-                			<li><a href="${pageContext.request.contextPath}/searchFirstCategoryServlet?action=fc&pageNumFc=${p}">${p} </a></li>
-                		</c:if>
-                	</c:forEach> 
-                	
-                	<c:if test="${pageNumFc==pageCount}">
-                		<li class="disabled"><a href="#">&raquo;</a></li>
-                	</c:if>
-                	<c:if test="${pageNumFc!=pageCount}">
-                		<li><a href="${pageContext.request.contextPath}/searchFirstCategoryServlet?action=fc&pageNumFc=${pageNumFc+1}">&raquo;</a></li>
-                	</c:if>
-				</ul>
-        	</div>
-        
-    </div>
-</form>
+       <div class="col-md-8 " style="height: 1000px">
+        <iframe name="kfc" width="1200px" height="1000px" frameborder="0">
+        	
+        </iframe>    
+    	</div>
           
-            
-            
+
+      
            
         </div>
-	
-    
 </body>
 </html>
